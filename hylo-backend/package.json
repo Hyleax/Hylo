@@ -26,7 +26,5 @@
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.1"
   },
-  "engines": {
-
-  }
+  "engines": {}
 }
