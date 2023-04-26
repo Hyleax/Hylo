@@ -125,6 +125,7 @@ export type nameInitalsType = {
                   <h3>{ email }</h3>
                   <h4>Joined on: {String(dateCreatedOn)}</h4>
                   <h5>{description}<i>- {fullName}</i></h5>
+                  <h3>Norman Teik-Wei Yap 47787717 INFS3202</h3>
                   </div>
             </div>
 
