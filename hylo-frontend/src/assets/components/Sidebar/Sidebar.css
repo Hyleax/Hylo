@@ -1,0 +1,63 @@
+
+
+.discussion-btn {
+    font-weight: bold;
+    box-shadow: 0 2px 3px 0px rgba(0,0,0,.2);
+    border: none;
+    background-color: #9599E2;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 13px 15px;
+}
+
+.discussion-btn:hover {
+    transition: 0.2s ease-in-out;
+    background-color: lightpink;
+    color: black;
+}
+
+.discussion-btn:active {
+   background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+}
+
+.category-header {
+    font-size: 30px;
+    border-bottom: 2px dotted black;
+    padding-bottom: 5px;
+    margin: 0px 0px 10px 0px ;
+}
+
+.category-inner-container {
+    display: flex;
+    align-items: center;
+}
+
+.category-container {
+    height: 60px;
+    display: flex;
+    padding: 5px;
+    text-align: center;
+    background-color: skyblue;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.category-btn {
+    text-align: center;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    padding: 13px 30px;
+}
+
+.category-btn:hover {
+    background-color: lightpink;
+}
+
+.category-btn:active {
+    background-color: palevioletred;
+}

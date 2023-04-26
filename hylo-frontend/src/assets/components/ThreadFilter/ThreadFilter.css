@@ -1,0 +1,20 @@
+.thread-filter-container {
+    display: flex;
+    justify-content: right;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.thread-filter-btn {
+    font-size: 14px;
+    color: black;
+    background: skyblue;
+    border-radius: 7px;
+    margin: 8px 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.thread-filter-btn:hover {
+    background-color: #448EE2;
+}

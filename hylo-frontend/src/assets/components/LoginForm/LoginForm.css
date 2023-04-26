@@ -1,0 +1,98 @@
+
+.login-title {
+    font-size: 3.2rem;
+    margin: 5px 0 30px 0 ;
+}
+
+.first-login-container {
+    background-color: white;
+    width: 350px;
+    height: 410px;
+    border-radius: 5px;
+    padding: 10px 25px;
+    box-shadow: 0px 1px 20px 0px #000000;
+}
+
+.second-login-container {
+    position: relative;
+}
+
+.second-login-container > p {
+    margin-top: -27px;
+    font-size: small;
+    text-align: right;
+    cursor: pointer;
+    margin-bottom: 1.4rem;
+}
+
+.second-login-container > .error-msg {
+    width: 100%;
+    position: absolute;
+    bottom: 23%;
+    color: red;
+}
+
+.second-login-container > .user-stay-logged {
+    position: absolute;
+    width: auto;
+    bottom: 30%;
+}
+
+.second-login-container > p > a {
+    font-size: 0.9rem;
+    color: black;
+}
+
+.second-login-container > p > a:hover {
+    color: #00d2ff;
+}
+
+.login-user-input {
+    margin-bottom: 40px;
+}
+
+.login-user-input > input:focus {
+    outline: none;
+}
+
+
+.login-user-input > input {
+    font-size: 1.18rem;
+    background-color: white;
+    padding-left: 5px;
+    width: 97%;
+    height: 2.3rem;
+    border: none;
+    border-bottom: 2px solid grey;
+}
+
+.login-btn {
+    margin-top: 38px;
+    box-shadow: 0px 1px 2px 0.2px #000000;
+    color: whitesmoke;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 4px;
+    height: 2.5rem;
+    border: none;
+    background-color: #8BC6EC;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+}
+
+.login-btn:hover {
+    background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+    transition-duration: 2s;
+    cursor: pointer;   
+}
+
+.signup-btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-top: 1.3rem;
+}
+
+.signup-btn:hover {
+    font-weight: bold;
+    color: #3a47d5;
+}

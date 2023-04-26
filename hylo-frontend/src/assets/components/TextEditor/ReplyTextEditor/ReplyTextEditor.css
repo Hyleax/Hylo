@@ -1,0 +1,30 @@
+.reply-editor-container {
+    padding: 0px 250px;
+    position: relative; 
+    margin-bottom: 100px;
+}
+
+.reply-text-editor-quill {
+    height: 300px;
+}
+
+.your-answer {
+    text-align: left;
+}
+
+.reply-btn {
+    position: absolute;
+    right: 250px;
+    bottom: -90px;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: skyblue;
+    cursor: pointer;
+}
+
+.reply-btn:hover {
+    transition: 0.4s;
+    background-color: pink;
+}

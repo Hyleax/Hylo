@@ -1,0 +1,24 @@
+.update-profile-photo-btn {
+    cursor: pointer;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+    border: none;
+    border-radius: 8px;
+    padding: 15px 10px;
+    position: absolute;
+    bottom: 20px;
+    right: 65px;
+    font-size: 17px;
+}
+
+.update-profile-photo-btn:hover {
+    background-image: linear-gradient(135deg, #5891b7 0%, #9599E2 100%);
+}
+
+.pic-change-success-msg {
+    visibility: hidden;
+    font-size: 16px;
+    position: absolute;
+    bottom: 20px;
+    left: 80px;
+    color: green;
+}

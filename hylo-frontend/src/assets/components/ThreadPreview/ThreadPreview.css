@@ -1,0 +1,50 @@
+.thread-preview-container {
+    padding: 0px 30px 8px 20px;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.thread-preview-container:hover {
+    background-color: whitesmoke;
+}
+
+.thread-preview-title {
+    margin-top: 0px;
+    padding-top: 7px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.thread-preview-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.thread-preview-content-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.thread-preview-content-right {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.thread-preview-category {
+    text-transform: capitalize;
+    width: 70px;
+    background-color: red;
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+.thread-creator {
+    font-size: 11px;
+    color: #DD3700
+}
+
+.thread-days-ago {
+    font-style: italic;
+}

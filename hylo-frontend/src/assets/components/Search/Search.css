@@ -1,0 +1,25 @@
+.search-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #f1f1f1;
+    padding: 0px 10px;
+    font-size: 20px;
+}
+
+.search-input {
+    font-size: 18px;
+    width: 99.3%;
+    height: 30px;
+    margin: 0px;
+    padding: 5px 5px;
+    border: none;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+
+.magnifying-glass-icon {
+    width: 18px;
+}

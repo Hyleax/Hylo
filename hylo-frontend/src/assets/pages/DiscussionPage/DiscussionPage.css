@@ -1,0 +1,37 @@
+.discussion-container {
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    text-align: center;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: black; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+  .thread-not-selected-container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .thread-not-selected-container > h1 {
+    font-size: 70px;
+    color: skyblue;
+    font-weight: lighter;
+  }
