@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const connectDB = require('./db/connect')
 const port = process.env.PORT || 5000
-const cors = require('cors')
 
 app.use(cookieParser())
 
@@ -19,10 +18,6 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 const authMiddleware = require('./middleware/authMiddleware')
 
 app.use(express.json())
-app.use(cors({
-    origin: ["http://localhost:3002"],
-    credentials: true,
-}))
 
 //MAIN ROUTES
 app.use('/hylo/api/v1/auth', authRouter)
@@ -36,6 +31,7 @@ app.use(errorHandlerMiddleware)
 const start = async() => {
     try {
         await connectDB(process.env.MONGO_URI)
+        console.log("MONGODB connected");
         app.listen(port, () => {
             console.log(`server is listening on port ${port}`);
         })
