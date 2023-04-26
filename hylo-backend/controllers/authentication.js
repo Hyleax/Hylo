@@ -105,14 +105,16 @@ const login = async(req, res) => {
     const token = userExists.createJWT()
 
     // if user does not want to stay logged in, then set cookie to expire after session is over
-    // res.cookie("token", token, {
-    //     httpOnly: true,
-    //     maxAge: stayLoggedIn ? 10000000 : 0,
-    //     sameSite: 'none',
-    //     secure: true
-    // })
+    res.cookie("token", token, {
+        httpOnly: true,
+        maxAge: stayLoggedIn ? 10000000 : 0,
+        sameSite: 'none',
+        secure: true
+    })
 
-    // res.set('Set-Cookie', `token=${token}`)
+    res.set('Set-Cookie', `token=${token}`)
+
+    console.log(`This is the cookie being sent back from the server: ${req.cookies.token}`);
        
     // return user and token
     return res.status(StatusCodes.OK).json(

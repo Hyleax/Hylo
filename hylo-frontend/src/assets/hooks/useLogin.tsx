@@ -21,8 +21,10 @@ export default async function useLogin(
         }, {withCredentials: true}
         )
        
-        const cookieOptions = stayLoggedIn ? {maxAge: 1000000000, path: '/'} : {path: '/'}
-        cookies.set('token', data.token, cookieOptions)
+        // cookies are being set on the frontend, now need check server
+
+        // const cookieOptions = stayLoggedIn ? {maxAge: 1000000000, path: '/'} : {path: '/'}
+        // cookies.set('token', data.token, cookieOptions)
         return data.token
         
         
