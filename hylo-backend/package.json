@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "nodemon app",
+    "npm build": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +25,8 @@
     "mongodb": "^5.1.0",
     "mongoose": "^7.0.3",
     "nodemailer": "^6.9.1"
+  },
+  "engines": {
+
   }
 }
