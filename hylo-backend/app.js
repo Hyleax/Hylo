@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000
 const cors = require('cors')
 
 app.use(cors({
-    origin: "*",
+    origin: "http://localhost:3002",
     credentials: true
 }))
 app.use(cookieParser())

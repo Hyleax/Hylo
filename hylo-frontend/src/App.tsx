@@ -11,6 +11,7 @@ import CreatePostPage from './assets/pages/CreatePostPage/CreatePostPage'
 import UserContextProvider from './assets/context/userContextProvider'
 import PostContextProvider from './assets/context/PostContextProvider'
 
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 axios.defaults.withCredentials = true;
 
 function App() {
