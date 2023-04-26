@@ -8,6 +8,8 @@ const cors = require('cors')
 
 app.use(cors({
     origin: "http://localhost:3002",
+    preflightContinue: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }))
 app.use(cookieParser())
@@ -23,6 +25,8 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 const authMiddleware = require('./middleware/authMiddleware')
 
 app.use(express.json())
+
+
 
 app.use('/hylo/api/v1/auth', authRouter)
 app.use('/hylo/api/v1/user',authMiddleware, userRouter)
