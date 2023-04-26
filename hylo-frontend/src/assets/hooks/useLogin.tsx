@@ -14,7 +14,7 @@ export default async function useLogin(
     { username, password, stayLoggedIn }: useLoginProps, 
     setErrorMsg: React.Dispatch<React.SetStateAction<string>>) {
     try {
-        const { data } = await axios.post('http://localhost:5000/hylo/api/v1/auth/login', {
+        const { data } = await axios.post('https://hylo-discussion-backend.onrender.com/hylo/api/v1/auth/login', {
             username: username,
             password: password,
             stayLoggedIn: stayLoggedIn

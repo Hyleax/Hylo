@@ -17,7 +17,7 @@ export default async function useRegister(
     setErrorMsg: React.Dispatch<React.SetStateAction<string>>
     ) {
     try {
-        await axios.post('http://localhost:5000/hylo/api/v1/auth/register', 
+        await axios.post('https://hylo-discussion-backend.onrender.com/hylo/api/v1/auth/register', 
             {
                 email: email,
                 firstName: firstName,

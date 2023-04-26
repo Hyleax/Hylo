@@ -108,7 +108,7 @@ UserSchema.methods.sendVerificationEmail = function() {
         })
 
         jwt.sign({user: this._id}, process.env.JWT_SECRET, {expiresIn: '1d'}, (err, emailToken) => {
-            const url = `http://localhost:5000/hylo/api/v1/auth/verification/${emailToken}`;
+            const url = `https://hylo-discussion-backend.onrender.com/hylo/api/v1/auth/verification/${emailToken}`;
 
             transporter.sendMail({
                 to: this.email,

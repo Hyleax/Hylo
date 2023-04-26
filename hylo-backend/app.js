@@ -19,7 +19,6 @@ const authMiddleware = require('./middleware/authMiddleware')
 
 app.use(express.json())
 
-//MAIN ROUTES
 app.use('/hylo/api/v1/auth', authRouter)
 app.use('/hylo/api/v1/user',authMiddleware, userRouter)
 app.use('/hylo/api/v1/thread',authMiddleware, threadPostRouter)

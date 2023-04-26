@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "build": "npm run build && npm install"
+    "build": "npm run build && npm install",
+    "dev": "nodemon app"
   },
   "keywords": [],
   "author": "",
