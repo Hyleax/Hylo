@@ -4,7 +4,9 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const connectDB = require('./db/connect')
 const port = process.env.PORT || 5000
+const cors = require('cors')
 
+app.use(cors())
 app.use(cookieParser())
 
 // import routers
