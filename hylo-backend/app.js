@@ -18,8 +18,8 @@ app.use(cookieParser())
 
 const sessionConfig = {
     secret: 'secret-key',
-    resave: false,
-    saveUnitialized: false,
+    resave: true,
+    saveUnitialized: true,
     cookie: {
         sameSite: "none",
         secure: true
