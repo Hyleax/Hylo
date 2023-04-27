@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
-import { userType } from '../../context/userContextProvider'
 import './MainProfile.css'
 import useGetNameInitials from '../../hooks/useGetNameInitials'
 import AvatarEdit from '../Avatar-edit/AvatarEdit'
 import closeLogo from '../../images/x-circle-svgrepo-com.svg'
+import { userType } from '../../context/userContextProvider'
+import useUserData from '../../hooks/useUserData'
 
 type MainProfileProps = {
-    userData: userType
+    userData: userType | null
   }
   
 export type nameInitalsType = {
@@ -15,8 +16,12 @@ export type nameInitalsType = {
 }
   
   //main profile component
-  const MainProfile = ({ userData }: MainProfileProps) => {
-    const { email, description, fullName, dateCreatedOn, profilePic, totalRatings, numofIA, numOfPosts } = userData
+  const MainProfile = () => {
+
+     // get data of the logged in user
+  const  { userData } = useUserData()
+
+    const { email, description, fullName, dateCreatedOn, profilePic, totalRatings, numofIA, numOfPosts } = (userData as userType)
     const [nameInitials, setNameInitials] = useState<nameInitalsType>({} as nameInitalsType)
     const [modalOpen, setModalOpen] = useState(false)
     const [localProfilePic, setLocalProfilePic] = useState("")
@@ -28,8 +33,8 @@ export type nameInitalsType = {
     // check if name initials are set
     useEffect(() => {
       (function(){
-        if (fullName) {
-         setNameInitials(useGetNameInitials(userData.fullName))
+        if (String(fullName)) {
+         setNameInitials(useGetNameInitials(String(fullName)))
         }
 
         if (profilePic != ""){

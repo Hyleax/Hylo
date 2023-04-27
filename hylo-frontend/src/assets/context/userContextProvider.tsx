@@ -1,7 +1,7 @@
 import React, {useState, useEffect, createContext} from 'react'
 import axios from 'axios'
 
-export type userType  = {
+export type userType = {
   fullName: string,
   email: string,
   description: string,
