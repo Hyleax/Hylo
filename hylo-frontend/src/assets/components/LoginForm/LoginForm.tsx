@@ -16,6 +16,8 @@ const LoginForm = () => {
     // if there is cookie stored, then proceed to home page
     (function() {
       if (cookie.get('token')) {
+        console.log(cookie.get('token'));
+        
         navigate('/home/thread/view')
       }
 

@@ -86,14 +86,14 @@ UserSchema.methods.comparePassword = async function(inputtedPassword) {
 }
 
 // create JWT
-UserSchema.methods.createJWT = function() {
+UserSchema.methods.createJWT = function(stayLoggedIn) {
     return jwt.sign(
         {
             userID: this._id,
              name: this.username
         }, 
         process.env.JWT_SECRET,
-        {expiresIn: process.env.JWT_LIFETIME})
+        {expiresIn: stayLoggedIn ? process.env.JWT_LIFETIME: '1h'})
 }
 
 // send verification email
