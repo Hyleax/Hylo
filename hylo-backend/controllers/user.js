@@ -64,6 +64,18 @@ const changeProfilePic = async(req, res) => {
 
 
 
+// logout
+const logout = async(req, res) => {
+    const { userID } = req.user
+    const user = await userModel.findOne({_id: userID})
+
+    if (!user) {
+        return res.status(StatusCodes.BAD_REQUEST).json({error: 'error logging out, user not found'})
+    }
+
+   res.clearCookie("token")
+   res.status(StatusCodes.OK).json({status: "success", msg: "user has been logged out"})
+}
 
 // change password
 
@@ -75,4 +87,4 @@ const changeProfilePic = async(req, res) => {
 // view bookmarked posts
 
 
-module.exports = { getUser, changeProfilePic }
+module.exports = { getUser, changeProfilePic, logout}

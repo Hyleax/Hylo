@@ -108,11 +108,9 @@ const login = async(req, res) => {
     res.cookie("token", token, {
         secure: true,
         httpOnly: true,
-        maxAge: stayLoggedIn === true ? 10000000 : 0,
+        maxAge: stayLoggedIn === true ? 10000000000 : 0,
         SameSite: 'None',
     })
-
-    // res.set('Set-Cookie', `token=${token}`)
 
     console.log(`This is the cookie being sent back from the server: ${req.cookies.token}`);
        

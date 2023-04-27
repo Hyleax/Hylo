@@ -6,6 +6,7 @@ import useUserData from '../../hooks/useUserData'
 import HyloLogo from '../../images/hylo-logo-png.png'
 import useGetNameInitials from '../../hooks/useGetNameInitials'
 import { nameInitalsType } from '../MainProfile/MainProfile'
+import useLogout from '../../hooks/useLogout'
 
 const Navbar = () => {
    
@@ -39,11 +40,11 @@ const Navbar = () => {
     }
 
     const navigate = useNavigate()
-    const handleLogout = () => {
+    const handleLogout = async() => {
         navigate('/')
         setUserData(null)
-        const cookie = new Cookies()
-        cookie.remove('token',{ path: '/' })
+        const data = await useLogout()
+        console.log(data);
     }
 
     return (
