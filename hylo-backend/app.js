@@ -5,6 +5,8 @@ const app = express()
 const connectDB = require('./db/connect')
 const port = process.env.PORT || 5000
 const cors = require('cors')
+const session = require('express-session')
+
 
 app.use(cors({
     origin: "https://hylo-discussion.netlify.app",
@@ -13,6 +15,16 @@ app.use(cors({
     credentials: true
 }))
 app.use(cookieParser())
+
+const sessionConfig = {
+    secret: 'secret-key',
+    cookie: {
+        sameSite: "none",
+        secure: true
+    }
+}
+
+app.use(session(sessionConfig))
 
 // import routers
 const authRouter = require('./routes/authentication')
