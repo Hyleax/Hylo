@@ -10,7 +10,7 @@ const session = require('express-session')
 
 app.use(cors({
     origin: "https://hylo-discussion.netlify.app",
-    preflightContinue: true,
+    preflightContinue: false,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }))
@@ -18,6 +18,8 @@ app.use(cookieParser())
 
 const sessionConfig = {
     secret: 'secret-key',
+    resave: false,
+    saveUnitialized: false,
     cookie: {
         sameSite: "none",
         secure: true
