@@ -109,7 +109,7 @@ const login = async(req, res) => {
         secure: true,
         httpOnly: true,
         maxAge: stayLoggedIn === true ? 10000000 : 0,
-        SameSite: 'none',
+        SameSite: 'None',
     })
 
     // res.set('Set-Cookie', `token=${token}`)
