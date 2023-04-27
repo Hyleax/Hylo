@@ -106,7 +106,8 @@ const login = async(req, res) => {
 
     // if user does not want to stay logged in, then set cookie to expire after session is over
     res.cookie("token", token, {
-        httpOnly: true,
+        expires: stayLoggedIn === true ? new Date(Date.now() + 900000000) : 0,
+        httpOnly: true, 
         sameSite: 'none',
         secure: true,
     })
