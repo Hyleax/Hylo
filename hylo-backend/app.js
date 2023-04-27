@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000
 const cors = require('cors')
 
 app.use(cors({
-    origin: "http://localhost:3002",
+    origin: "https://bejewelled-crisp-fbf631.netlify.app",
     preflightContinue: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
