@@ -9,7 +9,9 @@ export type useLoginProps = {
 
 export default async function useLogout() {
    try {
-    const { data } = await axios.delete('https://hylo-discussion-backend.onrender.com/hylo/api/v1/logout')
+    const { data } = await axios.delete('https://hylo-discussion-backend.onrender.com/hylo/api/v1/user/logout')
+    console.log(data);
+    
     return data
 
    } catch (error) {
