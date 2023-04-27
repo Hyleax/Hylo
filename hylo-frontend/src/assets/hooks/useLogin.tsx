@@ -20,6 +20,9 @@ export default async function useLogin(
             stayLoggedIn: stayLoggedIn
         }, {withCredentials: true}
         )
+
+        console.log(data);
+        
        
         // cookies are being set on the frontend, now need check server
 
