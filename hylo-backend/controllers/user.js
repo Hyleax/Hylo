@@ -73,7 +73,9 @@ const logout = async(req, res) => {
         return res.status(StatusCodes.BAD_REQUEST).json({error: 'error logging out, user not found'})
     }
 
-    const loggedout = res.clearCookie("token")
+    console.log("THis is the token req", req.cookies.token);
+
+    const loggedout = res.clearCookie('token')
     console.log("logout = ", loggedout);
 
     res.status(StatusCodes.OK).json({status: "success", msg: "user has been logged out"})
