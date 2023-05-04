@@ -30,6 +30,9 @@ export type nameInitalsType = {
     const modalRef = useRef<HTMLDivElement>(null)
     const modalContentRef = useRef<HTMLDivElement>(null)
     
+    console.log(profilePic);
+    
+
     // check if name initials are set
     useEffect(() => {
       (function(){
@@ -37,10 +40,7 @@ export type nameInitalsType = {
     
          setNameInitials(useGetNameInitials(String(fullName)))
         }
-
-        if (profilePic != ""){
           setLocalProfilePic(profilePic)
-        }
       })()
     }, [fullName, profilePic])
 

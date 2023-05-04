@@ -31,7 +31,9 @@ function App() {
             }>
 
               <Route path='profile' element={<ProfilePage/>}/>
-
+              <Route path='bookmarked' element={<ProfilePage/>}/>
+              <Route path='instructor-application' element={<ProfilePage/>}/>
+              
               {/* all following pages have the sidebar */}
               <Route path='thread' element = {
               <PostContextProvider>

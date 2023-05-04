@@ -6,8 +6,6 @@ const authMiddleware = (req, res, next) => {
          // grab token from cookie storage
         const token = req.cookies.token;
 
-        console.log("cookie storage", req.cookies);
-
         // console.log("This is the cookies",req.cookies);
         if (!token) {
             res.status(404).json({error: 'cookie not found not found'})

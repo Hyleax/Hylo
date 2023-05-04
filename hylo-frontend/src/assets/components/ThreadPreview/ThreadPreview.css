@@ -10,7 +10,7 @@
 .thread-preview-title {
     margin-top: 0px;
     padding-top: 7px;
-    font-size: 13px;
+    font-size: 15px;
     text-align: left;
 }
 
@@ -34,7 +34,7 @@
 .thread-preview-category {
     text-transform: capitalize;
     width: 70px;
-    background-color: red;
+    background-color: skyblue;
     padding: 8px 10px;
     font-size: 12px;
     border-radius: 8px;

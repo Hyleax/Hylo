@@ -2,13 +2,13 @@
     display: flex;
     justify-content: right;
     border-bottom: 2px solid #f1f1f1;
+    position: relative;
 }
 
 .thread-filter-btn {
-    font-size: 14px;
+    font-size: 17px;
     color: black;
-    background: skyblue;
-    border-radius: 7px;
+    border-radius: 20px;
     margin: 8px 6px;
     padding: 5px 10px;
     cursor: pointer;
@@ -16,5 +16,55 @@
 }
 
 .thread-filter-btn:hover {
-    background-color: #448EE2;
+    background-color: skyblue;
 }
+
+.filter-logo {
+    width: 15px;
+}
+
+.filters-container {
+    visibility: hidden;
+    background-color: #F0F0F0;
+    padding: 10px 10px;
+    text-align: right;
+    position: absolute;
+    z-index: 9999;
+    top: 30px;
+    right: 10px;
+    border-radius: 10px;
+}
+.filters-container > li {
+    border-radius: 20px;
+    padding: 3px 8px;
+}
+
+.filters-container > li:hover {
+    cursor: pointer;
+    background-color: pink;
+}
+
+.sort-container {
+    position: relative
+}
+.sort-criteria-container {
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    position: absolute;
+     background-color: #F0F0F0;
+     padding: 10px 10px;
+     border-radius: 10px;
+     top: 10px;
+     right: 118px;
+}
+
+.sort-criteria-container > span {
+    padding: 5px 15px;
+    border-radius: 20px;
+} 
+
+.sort-criteria-container > span:hover {
+    cursor: pointer;
+    background-color: skyblue;
+} 

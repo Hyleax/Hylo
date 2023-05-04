@@ -11,7 +11,6 @@ const AllThreads = () => {
   const allPosts = allPostsAndReplies?.filter((p) => {
     return p.postType === 'POST'
   })
-  
 
   const threadPreviewEls = allPosts?.map((p) => {
     return (

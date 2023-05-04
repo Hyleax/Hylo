@@ -119,10 +119,13 @@ const getAllPosts = async(req, res) => {
         }
     })
 
+    // filter posts by category
     let filteredPostsByCategory
     if (category) {
         filteredPostsByCategory = postsWithCategory.filter((p) => p.category === category)
     }
+
+    // filter post by filter criteria
 
     res.status(StatusCodes.OK).json({posts: category ? filteredPostsByCategory: postsWithCategory})
 }
