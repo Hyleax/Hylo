@@ -54,7 +54,7 @@ const Post = ({ data, numofReplies, setThread }: postProps) => {
     useEffect(() => {
         (
             async function() {
-                const { data } = await axios.get(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/get-post-user-type/${createdBy}`)
+                const { data } = await axios.get(`localhost:5000/hylo/api/v1/thread/get-post-user-type/${createdBy}`)
                 setLocalUserType(data.userType)
                 
             }
@@ -63,7 +63,7 @@ const Post = ({ data, numofReplies, setThread }: postProps) => {
  
 
     const handleRatingClick = async() => {
-        await axios.patch(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/upvote-post/${_id}`)
+        await axios.patch(`localhost:5000/hylo/api/v1/thread/upvote-post/${_id}`)
         setLocalRatings(prev => prev + 1)
     }
 

@@ -35,7 +35,7 @@ const PostContextProvider = ({children}: PostContextProviderType) => {
   
   useEffect(() => {
     (async() => {
-      const { data } = await axios.get('https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/get-all-posts')       
+      const { data } = await axios.get('localhost:5000/hylo/api/v1/thread/get-all-posts')       
       setAllPostsAndReplies(data.posts)
     })()
   }, [])

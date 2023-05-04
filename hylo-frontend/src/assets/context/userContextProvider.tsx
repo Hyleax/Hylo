@@ -34,7 +34,7 @@ const UserContextProvider = ({children}: UserContextProviderType) => {
   
   useEffect(() => {
     (async() => {
-      const { data } = await axios.get('https://hylo-discussion-backend.onrender.com/hylo/api/v1/user')   
+      const { data } = await axios.get('localhost:5000/hylo/api/v1/user')   
       setUserData(data)  
     })()
   }, [])

@@ -9,7 +9,7 @@ const cors = require('cors')
 
 
 app.use(cors({
-    origin: "https://hylo-discussion.netlify.app",
+    origin: ["https://hylo-discussion.netlify.app", "http://localhost:3002/"],
     preflightContinue: false,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true

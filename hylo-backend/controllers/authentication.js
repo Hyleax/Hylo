@@ -19,6 +19,8 @@ const registerAccount = async(req, res) => {
         return res.status(StatusCodes.UNAUTHORIZED).json({error: 'email or username has been taken'})
     }
 
+    // need to check if password is strong enough
+
     // check if both password fields match
     if (password !== confirmPassword) {
         return res.status(StatusCodes.UNAUTHORIZED).json({error: 'passwords do not match'})
