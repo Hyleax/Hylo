@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default async function useDeletePost(_id: string) {
     try {
-        await axios.delete(`localhost:5000/hylo/api/v1/thread/delete-reply/${_id}`)
+        await axios.delete(`http://localhost:5000/hylo/api/v1/thread/delete-reply/${_id}`)
     } catch (error) {
         
     }

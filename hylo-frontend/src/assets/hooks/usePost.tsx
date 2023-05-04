@@ -9,7 +9,7 @@ type usePostProps = {
 
 export default async function usePost({title, category, textEditorValue}: usePostProps) {
     try {
-        const { data } = await axios.post('localhost:5000/hylo/api/v1/thread/make-post', {
+        const { data } = await axios.post('http://localhost:5000/hylo/api/v1/thread/make-post', {
             title: title,
             content: textEditorValue,
             category: category

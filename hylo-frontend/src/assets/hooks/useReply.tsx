@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default async function useReply(threadID: string | undefined, replyTextEditorValue: string) {
     try {
-        const { data } = await axios.post(`localhost:5000/hylo/api/v1/thread/reply-post/${threadID}`, {
+        const { data } = await axios.post(`http://localhost:5000/hylo/api/v1/thread/reply-post/${threadID}`, {
             content: replyTextEditorValue
         })
         

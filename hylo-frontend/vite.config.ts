@@ -9,12 +9,12 @@ export default defineConfig({
   server: {
     host: "localhost",
     port: 3002,
-    // proxy: {
-    //   "/hylo": {
-    //     target: "http://localhost:5000/",
-    //     changeOrigin: true
-    //   }
-    // },
+    proxy: {
+      "/hylo": {
+        target: "http://localhost:5000/",
+        changeOrigin: true
+      }
+    },
   },
   plugins: [react()],
 })
