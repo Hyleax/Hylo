@@ -33,7 +33,8 @@ export type nameInitalsType = {
     // check if name initials are set
     useEffect(() => {
       (function(){
-        if (String(fullName)) {
+        if (String(fullName) !== 'undefined') {
+    
          setNameInitials(useGetNameInitials(String(fullName)))
         }
 
