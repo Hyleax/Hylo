@@ -1,10 +1,18 @@
-import React, {useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import './ThreadFilter.css'
 import filterLogo from '../../images/filter-svgrepo-com.svg'
+import useGetAllPosts from '../../hooks/useGetAllPosts'
+import { useSortPosts } from '../../hooks/useSortPosts'
 
 const ThreadFilter = () => {
   const filtersContainerRef = useRef<HTMLUListElement>(null)
   const sortContainerRef = useRef<HTMLDivElement>(null)
+  const { setAllPostsAndReplies } = useGetAllPosts()
+  const [sort, setSort] = useState("")
+    
+  useEffect(() => {
+    
+  })
 
   const toggleFiltersContainer = () => {
     if (filtersContainerRef.current != null) {
@@ -34,6 +42,11 @@ const handleMouseLeave = () => {
     }
 }
 
+const handleSort = async(sortCriteria?: string) => {
+  const data  =  await useSortPosts(sortCriteria)
+  setAllPostsAndReplies(data)
+}
+
   return (
     <div className='thread-filter-container'>
         <button className='thread-filter-btn' onClick={toggleFiltersContainer}><img className='filter-logo' src={filterLogo} alt="" /> Filters</button>
@@ -57,9 +70,9 @@ const handleMouseLeave = () => {
                 ref={sortContainerRef}
                 onMouseLeave={handleMouseLeave}
                 >
-                  <span>Ascending</span>
-                  <span>Descending</span>
-                  <span>Upvotes</span>
+                  <span onClick={() => handleSort('title')}>Alphabetical</span>
+                  <span onClick={() => handleSort('-title')}>Descending</span>
+                  <span onClick={() => handleSort('-ratings')}>Upvotes</span>
               </div>
             </li>
         </ul>

@@ -4,6 +4,7 @@ import magnifyingGlassIcon from '../../images/magnifying-glass.svg'
 import useGetAllPosts from '../../hooks/useGetAllPosts'
 import useSearchPosts from '../../hooks/useSearchPosts'
 
+
 const Search = () => {
   const [searchText, setSearchText] = useState("")
   const { setAllPostsAndReplies } = useGetAllPosts()

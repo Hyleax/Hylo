@@ -40,6 +40,8 @@ const createPost = async(req, res) => {
         })
 }   
 
+
+
 // get all posts that have the same threadID
 const getThread = async(req, res) => {
     const threadPosts = await PostModel.find({threadID: req.params.threadID})
@@ -82,14 +84,24 @@ const getThread = async(req, res) => {
 
 // get all posts from the Collection
 const getAllPosts = async(req, res) => {
-    const { title, category } = req.query
+    const { title, category, filterCriteria, sort } = req.query
     // initialize query object
     const queryObject = {}
     if (title) {
         queryObject.title = {$regex: title, $options: 'i'}
     }
 
-    const allPosts = await PostModel.find(queryObject)
+    
+    let allPosts;
+    // sort posts according to sorting criteria provided
+console.log(sort);
+    if (sort) {
+        allPosts = PostModel.find(queryObject)
+        allPosts = await allPosts.sort(sort)
+    }else {
+        allPosts = await PostModel.find(queryObject)
+    }
+    
 
     const posts = await Promise.all(
         allPosts.map(async (p) => {
@@ -138,9 +150,6 @@ const getAllPosts = async(req, res) => {
 const updatePost = async(req, res) => {
     res.status(200).json({msg: 'post has been updated'})
 }
-
-
-
 
 
 // ONLY INSTRUCTORS CAN USE THIS CONTROLLER
