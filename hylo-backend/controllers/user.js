@@ -72,23 +72,52 @@ const logout = async(req, res) => {
     if (!user) {
         return res.status(StatusCodes.BAD_REQUEST).json({error: 'error logging out, user not found'})
     }
-
-    console.log("THis is the token req", req.cookies.token);
-
-    const loggedout = res.clearCookie('token')
-    console.log("logout = ", loggedout);
-
+    res.clearCookie('token')
     res.status(StatusCodes.OK).json({status: "success", msg: "user has been logged out"})
     }
+
+
+
+
+// UPLOAD DOCUMENTS IN ORDER TO BECOME INSTRUCTOR
+const uploadFiles = async(req, res) => {
+
+    if (req.files) {
+        const { userID } = req.user
+        const user = await userModel.findOne({_id: userID})
+        
+        if (!user) {
+            return res.status(StatusCodes.BAD_REQUEST).json({error: 'error uploading files, user not found'})
+        }
+
+        let path = ''
+        req.files.forEach((file) => {
+            path += file.path + ','
+        })
+        path = path.substring(0, path.lastIndexOf(","))
+        const uploadedFiles = await user.uploadFile(path)
+
+        // check if provided fileString have been saved by the DB
+        if (path !== uploadedFiles) {
+            return res.status(StatusCodes.BAD_REQUEST).json({error: 'error occured when uploading files'}) 
+        }
+
+        // change userType to instructor
+        await user.changeUserType()
+
+        return res.status(StatusCodes.OK).json({status: 'success', msg: 'documents have been succesfully uploaded'})
+    }
+
+    else {
+        return res.status(StatusCodes.BAD_REQUEST).json({error: 'there are no files in the request'})
+    }
+}
 
 // change password
 
 // forgot password
 
-
-// change description
-
 // view bookmarked posts
 
 
-module.exports = { getUser, changeProfilePic, logout}
+module.exports = { getUser, changeProfilePic, logout, uploadFiles}

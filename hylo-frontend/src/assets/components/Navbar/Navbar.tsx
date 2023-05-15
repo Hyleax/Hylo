@@ -78,7 +78,7 @@ const Navbar = () => {
 
                             <span><Link to={'profile'} className='link-item'>User Details</Link></span>
                             <span>Bookmarked Posts</span>
-                            <span>Instructor Application</span>
+                            <span><Link to={'instructor-application'} className='link-item'>Instructor Application</Link></span>
                             <span
                                 onClick={handleLogout} 
                                 className='logout'>Logout</span>

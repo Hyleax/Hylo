@@ -86,15 +86,16 @@ const getThread = async(req, res) => {
 const getAllPosts = async(req, res) => {
     const { title, category, filterCriteria, sort } = req.query
     // initialize query object
-    const queryObject = {}
+    let queryObject = {}
     if (title) {
         queryObject.title = {$regex: title, $options: 'i'}
     }
 
+    // filter posts
+    // prob call a separate helper function to help filter posts
     
-    let allPosts;
     // sort posts according to sorting criteria provided
-console.log(sort);
+    let allPosts;
     if (sort) {
         allPosts = PostModel.find(queryObject)
         allPosts = await allPosts.sort(sort)
@@ -145,6 +146,7 @@ console.log(sort);
 
 
 
+
 // maybe remember to put a small 'update message'/ should maybe include in the Model as well
 // use the _id of the post to delete
 const updatePost = async(req, res) => {
@@ -172,7 +174,9 @@ const deletePost = async(req, res) => {
 }
 
 
+const filterPosts = () => {
 
+}
 
 
 // get the thread _id from req.params

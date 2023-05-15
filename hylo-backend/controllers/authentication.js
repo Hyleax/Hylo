@@ -113,8 +113,6 @@ const login = async(req, res) => {
         sameSite: 'none',
         secure: true,
     })
-
-    console.log(`This is the cookie being sent back from the server: ${req.cookies.token}`);
        
     // return user and token
     return res.status(StatusCodes.OK).json(

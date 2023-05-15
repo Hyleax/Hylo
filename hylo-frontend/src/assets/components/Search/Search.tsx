@@ -26,7 +26,7 @@ const Search = () => {
 
   return (
     <div className='search-container'>
-        <input className='search-input' type="text" onChange={(e) => handleSearch(e)}/>
+        <input placeholder='Search for a question...' className='search-input' type="text" onChange={(e) => handleSearch(e)}/>
         <img className='magnifying-glass-icon' src= {magnifyingGlassIcon} alt="" />
     </div>
   )

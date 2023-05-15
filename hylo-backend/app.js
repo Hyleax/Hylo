@@ -28,6 +28,7 @@ app.use(cookieParser())
 
 app.set("trust proxy", 1)
 // app.use(session(sessionConfig))
+app.use(express.urlencoded({ extended: false }))
 
 // import routers
 const authRouter = require('./routes/authentication')

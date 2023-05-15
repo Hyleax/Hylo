@@ -38,7 +38,7 @@ const UserContextProvider = ({children}: UserContextProviderType) => {
       setUserData(data)  
     })()
   }, [])
-
+  
 
   return (
     <UserContext.Provider value={{userData, setUserData}}>

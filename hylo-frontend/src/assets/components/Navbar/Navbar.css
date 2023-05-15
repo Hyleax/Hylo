@@ -5,6 +5,7 @@ nav {
     align-items: center;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
     height: 70px;
+    
 }
 
 .nav-title {
@@ -29,6 +30,7 @@ nav {
 }
 
 .menu-dropdown {
+    z-index: 9999;
     text-align: center;
     justify-content: space-between;
     display: flex;

@@ -65,6 +65,11 @@ const UserSchema = new mongoose.Schema({
     dateCreatedOn: {
         type: Date,
         default: new Date()
+    },
+
+    // upload files
+    files: {
+        type: String
     }
 })
 
@@ -126,5 +131,15 @@ UserSchema.methods.sendVerificationEmail = function() {
    }
 }
 
+UserSchema.methods.uploadFile = async function(fileString) {
+    this.files = fileString
+    await this.save()
+    return this.files
+}
+
+UserSchema.methods.changeUserType = async function() {
+    this.userType = 'INSTRUCTOR'
+    await this.save()
+}
 
 module.exports = mongoose.model('User', UserSchema)

@@ -10,6 +10,7 @@ import ThreadLayout from './assets/Layouts/ThreadLayout'
 import CreatePostPage from './assets/pages/CreatePostPage/CreatePostPage'
 import UserContextProvider from './assets/context/userContextProvider'
 import PostContextProvider from './assets/context/PostContextProvider'
+import InstructorApplicationPage from './assets/pages/InstructorApplicationPage/InstructorApplicationPage'
 
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 axios.defaults.withCredentials = true;
@@ -32,7 +33,7 @@ function App() {
 
               <Route path='profile' element={<ProfilePage/>}/>
               <Route path='bookmarked' element={<ProfilePage/>}/>
-              <Route path='instructor-application' element={<ProfilePage/>}/>
+              <Route path='instructor-application' element={<InstructorApplicationPage/>}/>
               
               {/* all following pages have the sidebar */}
               <Route path='thread' element = {
