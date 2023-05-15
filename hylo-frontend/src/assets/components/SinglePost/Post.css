@@ -194,3 +194,13 @@
 .approved-logo {
     width: 50px;
 }
+
+.answer-ranking {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.answer-ranking > span {
+    font-size: 20px;
+    color: #39FF14;
+}

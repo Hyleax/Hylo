@@ -47,6 +47,11 @@ const PostSchema = new mongoose.Schema({
         default: false
     },
 
+    rank: {
+        type: Number,
+        default: 0
+    },
+
     threadID: {
         type: mongoose.Types.ObjectId,
         ref: 'Thread',
@@ -79,5 +84,11 @@ PostSchema.methods.checkReplierID = function(givenUserID) {
         return true
     }
     return false
+}
+
+PostSchema.methods.rankAnswer = async function(num) {
+    this.rank = num
+    await this.save()
+    return this.rank
 }
 module.exports = mongoose.model('Post', PostSchema)

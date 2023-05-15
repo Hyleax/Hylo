@@ -1,6 +1,6 @@
 const express = require('express')
 const threadPostRouter = express.Router()
-const { createPost, getAllPosts, getThread, createReply, deletePost, deleteReply, updatePost, approvePost, upvotePost, updateReply, getPostAuthorUserType } = require('../controllers/threadPost')
+const { createPost, getAllPosts, getThread, createReply, deletePost, deleteReply, updatePost, approvePost, upvotePost, updateReply, getPostAuthorUserType, rankAnswer } = require('../controllers/threadPost')
 
 threadPostRouter.get('/get-all-posts', getAllPosts)
 threadPostRouter.get('/get-thread/:threadID', getThread)
@@ -15,7 +15,7 @@ threadPostRouter.get('/get-post-user-type/:userID', getPostAuthorUserType)
 // maybe I will let the 'delete-post' and 'update-post' do it instead
 threadPostRouter.delete('/delete-reply/:postID', deleteReply)
 threadPostRouter.patch('/update-reply', updateReply)
-
+threadPostRouter.patch('/rankReply/:postID', rankAnswer)
 
 
 

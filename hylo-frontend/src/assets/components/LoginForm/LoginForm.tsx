@@ -67,7 +67,7 @@ const LoginForm = () => {
               </div>
               
 
-              <p><a>Forgot password ?</a></p>
+              <p><Link to={'forgot-password'} className='forgot-password-link'>Forgot password ?</Link></p>
               
               <div className='user-stay-logged'>
                 <input 

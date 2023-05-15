@@ -23,25 +23,29 @@ export type postType = {
     _id: string
     profilePic: string
     userType: String
+    rank: number
 }
 
 type postProps = {
   data: postType
   numofReplies: number
   setThread: React.Dispatch<React.SetStateAction<postType[]>>
+  thread: postType[]
+  handleRankAnswer: () => number | undefined
 }
 
-const Post = ({ data, numofReplies, setThread }: postProps) => {
+const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postProps) => {
     const { userData } = useUserData()
     
-    const {content, createdBy, creatorName, instructorApproved, profilePic, postedDate, ratings, title, _id} = data
+    const {content, createdBy, creatorName, instructorApproved, profilePic, postedDate, ratings, title, _id, rank} = data
     const [localProfilePic, setLocalProfilePic] = useState(profilePic)
-    const [localRatings, setLocalRatings] = useState(ratings)
+    const [localRatings, setLocalRatings] = useState(0)
     const [isMenuOpen, setIsMenuOpen] = useState(true)
     const [localInstructorApproved, setLocalInstructorApproved] = useState(instructorApproved)
     const [localUserType, setLocalUserType] = useState("")
     const postMenuRef = useRef<HTMLDivElement>(null)
-    
+    const [localRank, setLocalRank] = useState<number | undefined>(rank)
+    const [isRankingClicked, setIsRankingClicked] = useState(false)
     // get the name initials
     const {firstInitial, secondInitial} = useGetNameInitials(creatorName)
    
@@ -60,7 +64,7 @@ const Post = ({ data, numofReplies, setThread }: postProps) => {
             }
         )()
     }, [])
- 
+
 
     const handleRatingClick = async() => {
         await axios.patch(`http://localhost:5000/hylo/api/v1/thread/upvote-post/${_id}`)
@@ -95,6 +99,22 @@ const Post = ({ data, numofReplies, setThread }: postProps) => {
         }
     }
 
+    const handleRanking = async() => {
+        if (isRankingClicked !== true) {
+            let num  = handleRankAnswer()
+            if (num && num <= numofReplies) {
+               try {
+                setLocalRank(num)
+                const {data} = await axios.patch(`http://localhost:5000/hylo/api/v1/thread/rankReply/${_id}`, {
+                    rank: num
+                })
+               } catch (error) {                
+               }
+            }
+        }
+        setIsRankingClicked(true)
+    }
+
     return (
         <div>
             <p className='post-title'>{title  ? title : ""} </p>
@@ -123,14 +143,15 @@ const Post = ({ data, numofReplies, setThread }: postProps) => {
                             </p>
                             <p className='days-ago'>days ago</p>
                         </div>
-
+                        
                         <div className="post-right-side-container">
+            
                         {localInstructorApproved && <img className='approved-logo' src= {approvedLogo} alt="" />}
                         <p> 
                             <span className='posted-on'>posted on</span> <br />
                             <span className='date'>{String(postedDate)}</span>
                         </p>
-
+                         {localRank !== 0 && <div className='answer-ranking'> rank:<span> {localRank}</span> </div>}
                         {((!title && creatorName === userData?.fullName) || (userData?.userType === 'INSTRUCTOR' && !title)) &&
                         <div className='three-dots-container'>
                             <img
@@ -150,6 +171,16 @@ const Post = ({ data, numofReplies, setThread }: postProps) => {
                                     className='three-dots-btn'>
                                         approve
                                 </button>}
+                                
+                                {/* if logged in user is the same as post author */}
+                                {
+                                    (userData.fullName === thread[0].creatorName) &&
+                                    <button
+                                        onClick={handleRanking}
+                                        className='three-dots-btn'>
+                                        rank
+                                    </button>
+                                }
                             </div>
                         </div>}
                         

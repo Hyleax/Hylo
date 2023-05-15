@@ -13,6 +13,7 @@ export type replyType = {
     threadID: string;
     _id: string;
     category: string
+    rank: number
 }
 
 export type postContextType = {

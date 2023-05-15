@@ -11,13 +11,26 @@ type viewThreadProps = {
 }
 
 const ViewThread = ({threadID}: viewThreadProps) => {
-  const [thread, setThread] = useState<postType[]>([])
-  
+const [thread, setThread] = useState<postType[]>([])
+const [rankPointer, setRankPointer] = useState(0)
+
+const handleRankAnswer = () => {
+    if (rankPointer < thread.length - 1) {
+      setRankPointer(prev => prev = prev + 1)    
+      let num = rankPointer
+      return ++num
+    }
+}
+
+
+
+
   useEffect(() => {
     (
       async function() {
         const threadData = await useGetThread(threadID)
         setThread(threadData.posts)
+        setRankPointer(0)
       }
     )()
   }, [threadID])
@@ -25,7 +38,13 @@ const ViewThread = ({threadID}: viewThreadProps) => {
   
   
   const posts = thread.map((p: postType ) => {
-    return <Post data = {p} key={p._id} numofReplies = {thread.length - 1} setThread={setThread}/>
+    return <Post 
+      data = {p} 
+      key={p._id} 
+      numofReplies = {thread.length - 1} 
+      setThread={setThread} 
+      thread={thread}
+      handleRankAnswer={handleRankAnswer}/>
   })
 
     return (

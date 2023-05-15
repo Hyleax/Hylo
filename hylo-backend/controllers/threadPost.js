@@ -333,7 +333,17 @@ const getPostAuthorUserType = async(req, res) =>{
     return res.status(StatusCodes.OK).json({userType: user.userType})
 }
 
+const rankAnswer = async(req, res) => {
+    const { rank } = req.body
+    const post = await PostModel.findOne({ _id: req.params.postID})
+    const rankNum = post.rankAnswer(rank)
+
+    res.status(StatusCodes.OK).json({
+        status: 'success',
+        msg: 'post has been ranked',
+        rank: rankNum
+    })
+}
 
 
-
-module.exports = {createPost, getAllPosts, getThread, createReply, deletePost, deleteReply, updatePost, approvePost, upvotePost, updateReply, getPostAuthorUserType}
+module.exports = {createPost, getAllPosts, getThread, createReply, deletePost, deleteReply, updatePost, approvePost, upvotePost, updateReply, getPostAuthorUserType, rankAnswer}

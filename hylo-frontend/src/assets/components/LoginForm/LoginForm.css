@@ -96,3 +96,7 @@
     font-weight: bold;
     color: #3a47d5;
 }
+
+.forgot-password-link {
+    text-decoration: none;
+}

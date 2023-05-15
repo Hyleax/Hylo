@@ -124,4 +124,101 @@ const login = async(req, res) => {
         })
 }
 
-module.exports = { registerAccount, login, authenticateVerificationEmail }
+
+
+
+// User forgot password
+// accepts email, ask user to click on link, enter new password to link
+
+const forgotPassword = async(req, res) => {
+    const { email } = req.body
+
+    // check if email exists
+    const user  = await UserModel.findOne({ email: email })
+
+    if (!user) {
+        res.status(StatusCodes.BAD_REQUEST).json({
+            status: 'error',
+            msg: 'this email does not exist in the system'
+        })
+    }
+
+    const emailSent = user.sendNewPasswordEmail()
+    if (!emailSent) {
+        res.status(StatusCodes.BAD_REQUEST).json({
+            status: 'error',
+            msg: 'an error occured while sending the email'
+        })
+    }
+
+    res.status(StatusCodes.OK).json({
+        status: 'success',
+        msg: 'password reset link has been sent to email'
+    })
+}
+
+
+
+
+// verify if password request was sent by the same email address
+const verifyForgotPasswordRequest = async(req, res) => {
+    const email = jwt.verify(req.params.token, process.env.JWT_SECRET)
+            if (email.userEmail !== req.params.email) {
+                return res.status(StatusCodes.UNAUTHORIZED).json({
+                    status: 'error',
+                    msg: 'emails do not match'
+                })
+            }
+
+    const user  = await UserModel.findOne({email: email.userEmail})
+
+    if (!user) {
+       return res.status(StatusCodes.BAD_REQUEST).json({
+            status: 'error',
+            msg: 'user with this email cannot be found'
+        })
+    }
+
+    // redirect to front-end link
+    console.log('redirecting to front-end');
+    return res.redirect('http://localhost:3002/change-password')
+}
+
+
+// change password
+const changePassword = async(req, res) => {
+    const { password, confirmPassword, email } = req.body
+
+    // check password strength
+    // const passwordRgx = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/"
+    // const passwordStrongEnough = passwordRgx.test(password)
+
+    // if (!passwordStrongEnough) {
+    //     return res.status(StatusCodes.UNAUTHORIZED).json({
+    //         status: 'error',
+    //         msg: 'password is not strong enough'
+    //     })
+    // }
+
+    // check if both passwords are the same
+    if (password !== confirmPassword) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            status: 'error',
+            msg: 'provided passwords do not match each other'
+        })
+    }
+
+    const user = await UserModel.findOne({email: email})
+
+    
+    const passwordChanged = user.changeUserPassword(password)
+
+    if (passwordChanged) {
+        return res.status(StatusCodes.OK).json({
+            status: 'success',
+            msg: 'password has been changed'
+        })
+    }
+}
+
+module.exports = { registerAccount, login, authenticateVerificationEmail, forgotPassword, verifyForgotPasswordRequest, changePassword }

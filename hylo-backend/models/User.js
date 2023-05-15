@@ -1,4 +1,4 @@
-// The User Model will consist of 2 types of users
+ // The User Model will consist of 2 types of users
 // first being the regular student user which posts questions on the site
 // the second being the instructor that has the ability to moderate the posts
 
@@ -101,16 +101,18 @@ UserSchema.methods.createJWT = function(stayLoggedIn) {
         {expiresIn: stayLoggedIn ? process.env.JWT_LIFETIME: '1h'})
 }
 
+const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.HOSTEMAIL,
+        pass: process.env.PASSWORD
+    }
+})
+
 // send verification email
 UserSchema.methods.sendVerificationEmail = function() {
     try {
-        const transporter = nodeMailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.HOSTEMAIL,
-                pass: process.env.PASSWORD
-            }
-        })
+        
 
         jwt.sign({user: this._id}, process.env.JWT_SECRET, {expiresIn: '1d'}, (err, emailToken) => {
             const url = `https://hylo-discussion-backend.onrender.com/hylo/api/v1/auth/verification/${emailToken}`;
@@ -131,15 +133,49 @@ UserSchema.methods.sendVerificationEmail = function() {
    }
 }
 
+UserSchema.methods.sendNewPasswordEmail = function() {
+    try {
+        
+
+        jwt.sign({userEmail: this.email}, process.env.JWT_SECRET, {expiresIn: '1d'}, (err, emailToken) => {
+            const url = `http://localhost:5000/hylo/api/v1/auth/password-reset-verification/${emailToken}/${this.email}`;
+
+            transporter.sendMail({
+                to: this.email,
+                subject: 'Hylo Reset Password',
+                html: `Please click on this link to reset your password: <a href="${url}">${url}</a>`
+            })
+            console.log('verification email has been sent');
+        })
+
+        return true
+   } 
+   
+   catch (error) {
+        console.log(error);
+   }
+}
+
+
+// allow normals to upload their documents
 UserSchema.methods.uploadFile = async function(fileString) {
     this.files = fileString
     await this.save()
     return this.files
 }
 
+// changes a user's userType from 'USER' to 'INSTRUCTOR'
 UserSchema.methods.changeUserType = async function() {
     this.userType = 'INSTRUCTOR'
     await this.save()
+}
+
+
+// changes a users password 
+UserSchema.methods.changeUserPassword = async function(password) {
+    this.password = password
+    await this.save()
+    return true
 }
 
 module.exports = mongoose.model('User', UserSchema)

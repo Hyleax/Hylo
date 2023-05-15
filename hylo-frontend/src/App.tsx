@@ -11,6 +11,8 @@ import CreatePostPage from './assets/pages/CreatePostPage/CreatePostPage'
 import UserContextProvider from './assets/context/userContextProvider'
 import PostContextProvider from './assets/context/PostContextProvider'
 import InstructorApplicationPage from './assets/pages/InstructorApplicationPage/InstructorApplicationPage'
+import ForgetPasswordPage from './assets/pages/ForgetPasswordPage/ForgetPasswordPage'
+import ChangePasswordPage from './assets/pages/ChangePasswordPage/ChangePasswordPage'
 
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 axios.defaults.withCredentials = true;
@@ -23,8 +25,9 @@ function App() {
           {/* login and register routes */}
           <Route path='/' element={<LoginPage/>} />
           <Route path='/register' element={<RegisterPage/>} />
+          <Route path='/forgot-password' element={<ForgetPasswordPage/>}/>
+          <Route path='/change-password' element={<ChangePasswordPage/>}/>
 
-          
             <Route path='/home' element={
             <UserContextProvider>
               <HomeLayout/>
