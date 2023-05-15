@@ -19,7 +19,16 @@ const registerAccount = async(req, res) => {
         return res.status(StatusCodes.UNAUTHORIZED).json({error: 'email or username has been taken'})
     }
 
-    // need to check if password is strong enough
+    // check password strength
+    const passwordRgx = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const passwordStrongEnough = passwordRgx.test(password)
+
+    if (!passwordStrongEnough) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            status: 'error',
+            msg: 'password is not strong enough'
+        })
+    }
 
     // check if both password fields match
     if (password !== confirmPassword) {
@@ -179,8 +188,7 @@ const verifyForgotPasswordRequest = async(req, res) => {
         })
     }
 
-    // redirect to front-end link
-    console.log('redirecting to front-end');
+    // redirect to front-end change password link
     return res.redirect('http://localhost:3002/change-password')
 }
 
@@ -190,15 +198,15 @@ const changePassword = async(req, res) => {
     const { password, confirmPassword, email } = req.body
 
     // check password strength
-    // const passwordRgx = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/"
-    // const passwordStrongEnough = passwordRgx.test(password)
-
-    // if (!passwordStrongEnough) {
-    //     return res.status(StatusCodes.UNAUTHORIZED).json({
-    //         status: 'error',
-    //         msg: 'password is not strong enough'
-    //     })
-    // }
+    const passwordRgx = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const passwordStrongEnough = passwordRgx.test(password)
+ 
+    if (!passwordStrongEnough) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            status: 'error',
+            msg: 'password is not strong enough'
+        })
+    }
 
     // check if both passwords are the same
     if (password !== confirmPassword) {
@@ -210,7 +218,7 @@ const changePassword = async(req, res) => {
 
     const user = await UserModel.findOne({email: email})
 
-    
+
     const passwordChanged = user.changeUserPassword(password)
 
     if (passwordChanged) {
