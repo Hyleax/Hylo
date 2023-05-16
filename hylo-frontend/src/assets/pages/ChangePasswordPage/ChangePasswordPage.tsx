@@ -1,5 +1,5 @@
 import React from 'react'
-import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm'
+import ChangePasswordForm from '../../components/FORMS/ChangePasswordForm/ChangePasswordForm'
 import './ChangePasswordPage.css'
 
 const ChangePasswordPage = () => {

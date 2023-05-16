@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import MainProfile from '../components/MainProfile/MainProfile'
+import MainProfile from '../components/PROFILE/MainProfile/MainProfile'
 
 // main profile page
 const ProfilePage = () => {

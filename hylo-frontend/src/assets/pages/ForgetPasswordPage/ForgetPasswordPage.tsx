@@ -1,5 +1,5 @@
 import React from 'react'
-import ForgetPasswordForm from '../../components/ForgetPasswordForm/ForgetPasswordForm'
+import ForgetPasswordForm from '../../components/FORMS/ForgetPasswordForm/ForgetPasswordForm'
 import './ForgetPasswordPage.css'
 
 const ForgetPasswordPage = () => {

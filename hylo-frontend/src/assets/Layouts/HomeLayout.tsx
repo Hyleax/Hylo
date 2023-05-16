@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import Navbar from '../components/NAV/Navbar/Navbar'
 import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 import useUserData from '../hooks/useUserData'
 

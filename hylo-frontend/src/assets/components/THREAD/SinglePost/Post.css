@@ -1,0 +1,214 @@
+.post-container {
+    display: grid;
+    grid-template-columns: 1fr 12fr;
+    padding: 0px 230px;
+    margin-bottom: 100px;
+}
+
+.post-title {
+    text-align: left;
+    font-size: 28px;
+    font-weight: medium;
+    margin: 40px 0px 10px 242px;
+}
+
+.post-pic-and-upvote {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px;
+}
+
+.profile-pic {
+    background-color: orange;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    box-shadow: 0 2px 10px 0px rgba(0,0,0,.2);
+}
+
+.default-pic {
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    box-shadow: 0 2px 10px 0px rgba(0,0,0,.2);
+}
+
+
+.upvote-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.upvote-container > span {
+    font-size: 26px;
+    color: #666666;
+}
+
+
+
+.upvote-btn {
+    font-size: 30px;
+    border: none;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    color: #666666;
+    background-color: transparent;
+}
+.upvote-btn:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    color: pink;
+}
+.upvote-btn:active {
+    cursor: pointer;
+    color: palevioletred;
+}
+
+.post-main {
+    padding: 10px;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.poster-name {
+    display: flex;
+    gap: 10px;
+}
+
+.posted-on {
+    font-size: 12px;
+}
+
+.post-name-days-ago {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.post-name-days-ago > p {
+    margin: 0px;
+}
+
+.post-content {
+    text-align: left;
+    max-width: 850px;
+    margin-bottom: -70px;
+}
+
+.post-userID {
+    color: violet;
+}
+
+.days-ago {
+    font-size: 11px;
+}
+
+.post-creator-name {
+    font-size: 15px;
+    color: #DD3700
+}
+
+.num-of-answers {
+    font-size: 26px;
+    text-align: left;
+    margin-left: 242px;
+    margin-top: 170px;
+}
+
+.post-right-side-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bookmark-logo {
+    width: 50px;
+}
+
+.bookmark-logo:hover{
+    cursor: pointer;
+}
+
+.three-dots-logo {
+    padding: 13px 21px;
+    width: 5px;
+    border-radius: 40%;
+}
+
+.three-dots-logo:hover {
+    background-color: #F5F5F5;
+    transition: 0.5s;
+}
+
+.three-dots-logo:active {
+    
+    background-color: rgb(205, 198, 198);
+}
+
+.three-dots-container {
+    position: relative;
+}
+
+.three-dots-menu {
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    position: absolute;
+    top: 90%;
+    left: 40%;
+    background-color: #F5F5F5;;
+    padding: 2px;
+}
+
+.three-dots-btn {
+    font-size: 16px;
+    width: auto;
+    background-color: #F5F5F5;;
+    padding: 15px 40px;
+    margin: 0px;
+    border: none;
+}
+
+.three-dots-btn:hover   {
+    border-radius: 10px;
+    background-color: rgb(205, 198, 198);
+    transition: ease-in-out 0.2s;
+}
+
+.three-dots-btn:active   {
+    background-color: rgb(138, 138, 138)
+}
+
+.tick-logo {
+    width: 18px;
+}
+
+.approved-logo {
+    width: 50px;
+}
+
+.answer-ranking {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.answer-ranking > span {
+    font-size: 20px;
+    color: #39FF14;
+}

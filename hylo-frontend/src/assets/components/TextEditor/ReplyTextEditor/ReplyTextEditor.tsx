@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill'
 import './ReplyTextEditor.css'
 import useReply from '../../../hooks/useReply'
 import useGetAllPosts from '../../../hooks/useGetAllPosts'
-import { postType } from '../../SinglePost/Post'
+import { postType } from '../../THREAD/SinglePost/Post'
 import { replyType } from '../../../context/PostContextProvider'
 
 type replyTextEditorProps = {

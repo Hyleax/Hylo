@@ -1,8 +1,8 @@
 import React from 'react'
 import './DiscussionPage.css'
 import { useParams } from 'react-router-dom'
-import AllThreads from '../../components/AllThreads/AllThreads'
-import ViewThread from '../../components/ViewThread.tsx/ViewThread'
+import AllThreads from '../../components/THREAD/AllThreads/AllThreads'
+import ViewThread from '../../components/THREAD/ViewThread.tsx/ViewThread'
 
 // Discussion page
 

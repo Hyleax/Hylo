@@ -1,5 +1,5 @@
 import React from 'react'
-import PostForm from '../../components/PostForm/PostForm'
+import PostForm from '../../components/FORMS/PostForm/PostForm'
 import './CreatePostPage.css'
 
 const CreatePostPage = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import InstructorForm from '../../components/InstructorForm/InstructorForm'
+import InstructorForm from '../../components/FORMS/InstructorForm/InstructorForm'
 import './InstructorApplicationPage.css'
 
 const InstructorApplicationPage = () => {

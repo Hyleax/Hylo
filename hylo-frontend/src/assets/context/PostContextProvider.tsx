@@ -1,6 +1,6 @@
 import React, {useState, useEffect, createContext} from 'react'
 import axios from 'axios'
-import { postType } from '../components/SinglePost/Post'
+import { postType } from '../components/THREAD/SinglePost/Post'
 
 export type replyType = {
     content: string;
