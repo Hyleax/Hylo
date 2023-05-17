@@ -7,10 +7,10 @@ main {
 
 .profile-container {
     border-radius: 20px;
-    width: 65rem;
-    margin-top: 200px;
+    width: 40rem;
+    margin-top: 160px;
     background-color: white;
-    height: 400px;
+    height: 500px;
     position: relative;
     box-shadow: 0 2px 10px 0px rgba(0,0,0,.2);
 }
@@ -83,7 +83,9 @@ main {
 }
 
 .profile-header-right {
-
+    display: flex;
+    gap: 30%;
+    padding: 0px;
     margin-right: 60px;
 }
 
@@ -103,10 +105,86 @@ ul > li {
 }
 
 .profile-details {
-    margin-top: 50px;
-    text-align: center;
+    margin-top: 70px;
+    position: relative;
 }
 
+.edit-profile-btn {
+    background-color: skyblue;
+    color: white;
+    position: absolute;
+    padding: 10px 10px;
+    right: 10px;
+    top: -55px;
+    border-radius: 15px;
+    border: none;
+}
+
+.edit-profile-btn:hover{
+    cursor: pointer;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+}
+
+.names-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.input-field {
+    position: relative;
+}
+
+.email-field {
+    position: absolute;   
+}
+
+.input-field > span{
+    position: absolute;
+    top: -20px;
+    font-size: 12px;
+    width: 70px;
+}
+
+.input-field > input, textarea, p{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.input-field > p{
+    margin-top: -2px;
+    padding: 0px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+textarea {
+    width: 450px;
+    height: 80px;
+}
+
+.email-container, .description-container, .date-container {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.save-profile-btn {
+    background-color: skyblue;
+    color: white;
+    position: absolute;
+    bottom: -60px;
+    right: 10px;
+    padding: 12px 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.save-profile-btn:hover {
+    cursor: pointer;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+
+}
+/* MODAL STUFF */
 .modal {
   display: none; /* Hidden by default */
   position: absolute; /* Stay in place */
@@ -147,6 +225,11 @@ ul > li {
     margin-right: 17px;
     cursor: pointer;
 }
+
+
+
+
+
 
 @media (max-width: 950px) {
     .profile-container {

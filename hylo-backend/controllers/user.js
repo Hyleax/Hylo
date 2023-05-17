@@ -110,7 +110,7 @@ const uploadFiles = async(req, res) => {
             return res.status(StatusCodes.BAD_REQUEST).json({error: 'error occured when uploading files'}) 
         }
 
-        // change userType to instructor
+        // change userType to INSTRUCTOR
             await userModel.findOneAndUpdate(
             {_id: userID},
             { $set: {userType: 'INSTRUCTOR'} },
@@ -140,6 +140,7 @@ const bookmarkThread = async(req, res) => {
             {error: 'user not found'})
     } 
 
+        // bookmark posts
          const { bookMarkedPosts } = await userModel.findOneAndUpdate(
             {_id: userID},
             { $push: { bookMarkedPosts: req.params.postID } },
@@ -202,4 +203,53 @@ const getBookmarkedPosts = async(req, res) => {
 }
 
 
-module.exports = { getUser, changeProfilePic, logout, uploadFiles, bookmarkThread,getBookmarkedPosts }
+
+// edit user profile 
+const editUserInfo = async(req, res) => {
+    const { userID } = req.user
+    const { firstName, lastName, description } = req.body
+
+    // check if all fields empty
+    if (!firstName && !lastName && !description) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            error: 'at least one field must be filled'
+        })
+    }
+
+    const user = await userModel.findOne({ _id: userID })
+    const names = user.fullName.split(" ")
+    let fullname;
+
+    if (firstName) {
+        fullname = `${firstName} ${names[2]}`
+        await userModel.findOneAndUpdate(
+            {_id: userID},
+            { $set: {fullName: fullname} },
+            {new: true, runValidators: true}
+        )
+    }
+
+    if (lastName) {
+        fullname = `${names[0]} ${lastName}`
+        await userModel.findOneAndUpdate(
+            {_id: userID},
+            { $set: {fullName: fullname} },
+            {new: true, runValidators: true}
+        )
+    }
+
+    if (description) {
+        await userModel.findOneAndUpdate(
+            {_id: userID},
+            { $set: {description: description} },
+            {new: true, runValidators: true}
+        )
+    }
+
+    return res.status(StatusCodes.OK).json({
+        status: 'success',
+        msg: 'changes to profile have been saved'
+    })
+}
+
+module.exports = { getUser, changeProfilePic, logout, uploadFiles, bookmarkThread,getBookmarkedPosts, editUserInfo }

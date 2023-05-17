@@ -5,6 +5,7 @@ import AvatarEdit from '../Avatar-edit/AvatarEdit'
 import closeLogo from '../../../images/x-circle-svgrepo-com.svg'
 import { userType } from '../../../context/userContextProvider'
 import useUserData from '../../../hooks/useUserData'
+import useSaveProfileInfo from '../../../hooks/useSaveProfileInfo'
 
 type MainProfileProps = {
     userData: userType | null
@@ -25,26 +26,41 @@ export type nameInitalsType = {
     const [nameInitials, setNameInitials] = useState<nameInitalsType>({} as nameInitalsType)
     const [modalOpen, setModalOpen] = useState(false)
     const [localProfilePic, setLocalProfilePic] = useState("")
+    const [localFirstName, setLocalFirstName] = useState('')
+    const [localLastName, setLocalLastName] = useState('')
+    const [localDescription, setLocalDescription] = useState('')
+    const [editBtnClicked, setEditBtnClicked] = useState(false)
     const imageContainerRef = useRef<HTMLDivElement>(null)
     const imageOverlayRef = useRef<HTMLDivElement>(null)
     const modalRef = useRef<HTMLDivElement>(null)
     const modalContentRef = useRef<HTMLDivElement>(null)
     
-    console.log(profilePic);
+    const str = String(dateCreatedOn)
+    const dateString = str.substring(0, 10)
+    let nameArray;
     
 
+    
+   
+
+    
+  
     // check if name initials are set
     useEffect(() => {
       (function(){
         if (String(fullName) !== 'undefined') {
     
          setNameInitials(useGetNameInitials(String(fullName)))
+         nameArray = fullName.split(" ")
+         setLocalFirstName(nameArray[0])
+         setLocalLastName(nameArray[1])
+         setLocalDescription(description)
         }
           setLocalProfilePic(profilePic)
       })()
     }, [fullName, profilePic])
 
-
+    
 
 
     // if mouse hover over and off the profile pic element
@@ -78,8 +94,16 @@ export type nameInitalsType = {
       }
     }
 
-    
-    
+    const saveProfileChanges = async(e:  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault()
+      if (!(!localFirstName || !localLastName)) {
+        const data = await useSaveProfileInfo(localFirstName, localLastName, localDescription)
+
+        if (data) {
+          setEditBtnClicked(prev => !prev)
+        }
+      }
+    }    
 
     return (
       <main>
@@ -102,6 +126,8 @@ export type nameInitalsType = {
                   >
                   <p className="">change profile pic</p>
                 </div>
+
+                
                 <div className="profile-header">
                   <ul className="profile-header-left">
                     
@@ -109,8 +135,10 @@ export type nameInitalsType = {
                       <span><b>{numOfPosts}</b></span>   
                       <span>Posts</span>                
                     </li>
+                  </ul>
   
-                    <li className="profile-stat">
+                  <ul className="profile-header-right">
+                  <li className="profile-stat">
                       <span><b>{totalRatings}</b></span>
                       <span>Upvotes</span>                   
                     </li>
@@ -120,19 +148,73 @@ export type nameInitalsType = {
                       <span>Approved</span>                   
                     </li>
                   </ul>
-  
-                  <ul className="profile-header-right">
-                    <li>Stats to be implemented</li>
-                  </ul>
                 </div>
   
                 <div className="profile-details">
-                  <h2>{fullName}</h2>
-                  <h3>{ email }</h3>
-                  <h4>Joined on: {String(dateCreatedOn)}</h4>
-                  <h5>{description}<i>- {fullName}</i></h5>
-                  <h3>Norman Teik-Wei Yap 47787717 INFS3202</h3>
+                  <button 
+                    onClick={() => setEditBtnClicked(prev => !prev)}
+                    className='edit-profile-btn'>{editBtnClicked ? 'cancel' : 'edit profile'}</button>
+                  <div className="names-container">
+
+                    <div className="input-field">
+                      <span>First Name</span>
+                      {editBtnClicked ? <input 
+                        type="text" 
+                        required
+                        value={localFirstName}
+                        onChange={e => setLocalFirstName(e.target.value)}
+                      />
+                    
+                      :
+                      <p>{localFirstName}</p>
+                      }
+                    </div>
+
+                    <div className="input-field">
+                      <span>Last Name</span>
+                      {editBtnClicked ? <input 
+                        required
+                        type="text" 
+                        value={localLastName}
+                        onChange={e => setLocalLastName(e.target.value)}/>
+                      
+                      :
+                      
+                      <p>{localLastName}</p>}
+                    </div>
                   </div>
+
+                  <div className="email-container">
+                    <div className="input-field">
+                        <span>Email</span>
+                        {editBtnClicked ? <input type="text" value={email} disabled/> :  <p>{email}</p>}
+                    </div>
+                  </div>
+
+                  <div className="description-container">
+                    <div className="input-field">
+                        <span>Description</span>
+                        {editBtnClicked ? <textarea 
+                          value={localDescription} 
+                          onChange={e => setLocalDescription(e.target.value)}
+                          placeholder='enter a description of yourself here'/> :
+                          <p>{localDescription ? localDescription : 'Enter a description about yourself'}</p>
+                        }
+                    </div>
+                  </div>
+
+                  {
+                    !editBtnClicked &&
+                    <div className="date-container">
+                    <div className="input-field">
+                        <span>Date joined</span>
+                        <p>{dateString}</p>
+                    </div>
+                  </div>
+                  }
+
+                  {editBtnClicked && <button onClick={e => saveProfileChanges(e)} className='save-profile-btn'>Save Changes</button>}
+                </div>
             </div>
 
             <div className="modal" ref={modalRef} >
