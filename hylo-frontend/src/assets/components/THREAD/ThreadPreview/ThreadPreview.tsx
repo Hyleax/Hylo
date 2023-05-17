@@ -6,9 +6,10 @@ import { replyType } from '../../../context/PostContextProvider'
 
 type ThreadPreviewProps = {
   data: (postType | replyType)
+  path: string
 }
 
-const ThreadPreview = ({data}:ThreadPreviewProps) => {
+const ThreadPreview = ({ data, path }:ThreadPreviewProps) => {
   const categoryRef = useRef<HTMLSpanElement>(null)
 
   const { creatorName, postedDate, ratings, threadID, title, _id, category } = (data as postType)
@@ -72,7 +73,7 @@ const ThreadPreview = ({data}:ThreadPreviewProps) => {
     const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(`../view/${threadID}`)
+    navigate(`${path}${threadID}`)
   }
 
     return (

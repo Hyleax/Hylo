@@ -35,6 +35,8 @@ const registerAccount = async(req, res) => {
         return res.status(StatusCodes.UNAUTHORIZED).json({error: 'passwords do not match'})
     }
 
+    // hash password
+
     const user = await UserModel.create(
         {
             username: username,

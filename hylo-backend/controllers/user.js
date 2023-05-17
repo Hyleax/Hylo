@@ -1,4 +1,5 @@
 const userModel = require('../models/User')
+const threadModel = require('../models/Thread')
 const PostModel = require('../models/Post')
 const { StatusCodes } = require('http-status-codes')
 
@@ -79,7 +80,7 @@ const logout = async(req, res) => {
 
 
 
-// UPLOAD DOCUMENTS IN ORDER TO BECOME INSTRUCTOR
+// upload documents to become instructor
 const uploadFiles = async(req, res) => {
 
     if (req.files) {
@@ -95,15 +96,26 @@ const uploadFiles = async(req, res) => {
             path += file.path + ','
         })
         path = path.substring(0, path.lastIndexOf(","))
-        const uploadedFiles = await user.uploadFile(path)
+
+    
+        // upload documents to db
+        const { files } = await userModel.findOneAndUpdate(
+            {_id: userID},
+            { $set: {files: path} },
+            {new: true, runValidators: true}
+        )
 
         // check if provided fileString have been saved by the DB
-        if (path !== uploadedFiles) {
+        if (path !== files) {
             return res.status(StatusCodes.BAD_REQUEST).json({error: 'error occured when uploading files'}) 
         }
 
         // change userType to instructor
-        await user.changeUserType()
+            await userModel.findOneAndUpdate(
+            {_id: userID},
+            { $set: {userType: 'INSTRUCTOR'} },
+            {new: true, runValidators: true}
+        )
 
         return res.status(StatusCodes.OK).json({status: 'success', msg: 'documents have been succesfully uploaded'})
     }
@@ -113,11 +125,81 @@ const uploadFiles = async(req, res) => {
     }
 }
 
-// change password
 
 
 
-// view bookmarked posts
+
+// save thread to bookmarks
+const bookmarkThread = async(req, res) => {
+    const { userID } = req.user
+
+    const user = await userModel.findOne({_id: userID})
+
+    if (!user) {
+        return res.status(StatusCodes.NOT_FOUND).json(
+            {error: 'user not found'})
+    } 
+
+         const { bookMarkedPosts } = await userModel.findOneAndUpdate(
+            {_id: userID},
+            { $push: { bookMarkedPosts: req.params.postID } },
+            {new: true, runValidators: true}
+        )
 
 
-module.exports = { getUser, changeProfilePic, logout, uploadFiles}
+    if (!(bookMarkedPosts[bookMarkedPosts.length - 1] === req.params.postID)) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            error: "threadID's are not the same"
+        }
+        )
+    }
+
+    return res.status(StatusCodes.OK).json({
+        status: 'success',
+        msg: 'thread has been saved'
+    })
+}
+
+
+
+
+
+// get user's bookmarked Posts
+const getBookmarkedPosts = async(req, res) => {
+    const { userID } = req.user
+
+    const user = await userModel.findOne({_id: userID})
+
+    if (!user) {
+        return res.status(StatusCodes.NOT_FOUND).json(
+            {error: 'user not found'})
+    } 
+
+    const bookmarkedPosts = await Promise.all(
+        user.bookMarkedPosts.map(async(postID) => {
+            const p = await PostModel.findOne({ _id: postID })
+            const thread = await threadModel.findOne({ _id: p.threadID })
+
+            const post = {
+                ...p,
+                category: thread.category
+            }
+
+            return post
+        })       
+    )
+
+    const bookmarkedPostsWithCategory = bookmarkedPosts.map((p) => {
+        return {
+            ...p._doc,
+            category: p.category
+        }
+    })
+    
+    return res.status(StatusCodes.OK).json({
+        bookmarkedPosts: bookmarkedPostsWithCategory
+    })
+}
+
+
+module.exports = { getUser, changeProfilePic, logout, uploadFiles, bookmarkThread,getBookmarkedPosts }

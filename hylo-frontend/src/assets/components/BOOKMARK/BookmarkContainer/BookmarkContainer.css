@@ -1,0 +1,18 @@
+.bookmark-container {
+    position: absolute;
+    right: 270px;
+    top: -10px;
+    min-width: 300px;
+    max-height: 500px;
+    border-radius: 20px;
+    overflow-y: scroll;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+    /* visibility: hidden; */
+}
+
+
+.bookmark-container-title {
+    margin: 12px 0px 0px 0px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}

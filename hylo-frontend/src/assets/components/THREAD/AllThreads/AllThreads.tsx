@@ -16,6 +16,7 @@ const AllThreads = () => {
     return (
       <ThreadPreview 
         data = {p} 
+        path = {`../view/`}
         key={p.threadID}
       />)
   })

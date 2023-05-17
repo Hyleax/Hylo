@@ -79,6 +79,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.pre('save', async function(next) {
     const salt  = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password, salt)
+    console.log(this.password);
     next()
 })
 
@@ -133,6 +134,8 @@ UserSchema.methods.sendVerificationEmail = function() {
    }
 }
 
+
+// send reset password link to email
 UserSchema.methods.sendNewPasswordEmail = function() {
     try {
         
@@ -155,21 +158,6 @@ UserSchema.methods.sendNewPasswordEmail = function() {
         console.log(error);
    }
 }
-
-
-// allow normals to upload their documents
-UserSchema.methods.uploadFile = async function(fileString) {
-    this.files = fileString
-    await this.save()
-    return this.files
-}
-
-// changes a user's userType from 'USER' to 'INSTRUCTOR'
-UserSchema.methods.changeUserType = async function() {
-    this.userType = 'INSTRUCTOR'
-    await this.save()
-}
-
 
 // changes a users password 
 UserSchema.methods.changeUserPassword = async function(password) {

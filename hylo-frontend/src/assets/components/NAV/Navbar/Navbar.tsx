@@ -7,6 +7,7 @@ import HyloLogo from '../../../images/hylo-logo-png.png'
 import useGetNameInitials from '../../../hooks/useGetNameInitials'
 import { nameInitalsType } from '../../PROFILE/MainProfile/MainProfile'
 import useLogout from '../../../hooks/useLogout'
+import BookmarkContainer from '../../BOOKMARK/BookmarkContainer/BookmarkContainer'
 
 const Navbar = () => {
    
@@ -44,7 +45,6 @@ const Navbar = () => {
         navigate('/')
         setUserData(null)
         const data = await useLogout()
-        console.log(data);
     }
 
     return (
@@ -81,17 +81,20 @@ const Navbar = () => {
                                     className='link-item'>User Details
                                 </Link>
                             </div>
-                            <div
-                                className='link-item bookmark-nav-option'>
-                                Bookmarked Posts
-                                
-                            </div>
+
                             <div>
                                 <Link 
                                     to={'instructor-application'} 
                                     className='link-item'>Instructor Application
                                     </Link>
                             </div>
+                            
+                            <div
+                                className=' bookmark-nav-option'>
+                               <span className='link-item'> Bookmarked Posts</span>
+                                <BookmarkContainer/>
+                            </div>
+            
                             <div
                                 onClick={handleLogout} 
                                 className='logout link-item'>Logout

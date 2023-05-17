@@ -45,9 +45,7 @@ nav {
     visibility: hidden;
 }
 
-.visible {
-    visibility: visible;
-}
+
 
 .menu-dropdown > span {
     font-size: 1.15rem;

@@ -9,7 +9,8 @@ import approvedLogo from '../../../images/approved-svgrepo-com.svg'
 import useApproveReply from '../../../hooks/useApproveReply'
 import useGetNameInitials from '../../../hooks/useGetNameInitials'
 import bookmarkEmptyLogo from '../../../images/bookmark-outline-svgrepo-com.svg'
-import bookmarkFilledLogo from '../../../images/approved-svgrepo-com.svg'
+import bookmarkFilledLogo from '../../../images/bookmark-svgrepo-com.svg'
+import useBookmarkThread from '../../../hooks/useBookmarkThread'
 
 
 export type postType = {
@@ -68,7 +69,7 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
             }
         )()
     }, [])
-
+    
 
     const handleRatingClick = async() => {
         await axios.patch(`http://localhost:5000/hylo/api/v1/thread/upvote-post/${_id}`)
@@ -120,7 +121,13 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
     }
 
     const handleBookmark = async() => {
-        setIsBookmarked(prev => !prev)
+        const isSaved = await useBookmarkThread(_id)
+        if (isSaved) {
+            // for now, users can't unsave by clicking again
+            if (isBookmarked !== true) {
+                setIsBookmarked(prev => !prev)
+            }
+        }
     }
 
     return (
