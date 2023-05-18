@@ -1,6 +1,7 @@
 const {StatusCodes} = require('http-status-codes')
 const UserModel = require('../models/User')
 const jwt = require('jsonwebtoken')
+const axios = require('axios')
 
 // controllers that handle authentication of the app
 // e.g., login, registration etc.
@@ -87,11 +88,20 @@ const authenticateVerificationEmail = async(req, res) => {
 
 // ACCOUNT LOGIN CONTROLLER
 const login = async(req, res) => {
-    const {username, password, stayLoggedIn} = req.body
+    const {username, password, stayLoggedIn, reCAPTCHAToken} = req.body
     // check if username or password is empty
     if (!username || !password) {
         return res.status(StatusCodes.BAD_REQUEST).json(
             {error: 'please fill in all fields'})
+    }
+
+    // check if user is a human or a bot
+    const isHuman = await validateHuman(reCAPTCHAToken)
+
+    if (!isHuman) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            error: 'user is not a human'
+        })
     }
 
     // check if username or email is in DB
@@ -135,6 +145,14 @@ const login = async(req, res) => {
         })
 }
 
+// helper method to validate if the entity trying to log in is a HUMAN or ROBOT
+const validateHuman = async(reCAPTCHAToken) => {
+    const secret = process.env.RECAPTCHA_SECRET_KEY
+    const { data } = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${reCAPTCHAToken}`)
+
+    console.log(data, "recaptcha data");
+    return data.success
+}
 
 
 

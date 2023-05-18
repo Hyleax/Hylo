@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Cookies from "universal-cookie";
 import './LoginForm.css'
 import useLogin from '../../../hooks/useLogin'
 import { Link, useNavigate } from 'react-router-dom'
-import HyloLogo from '../../images/hylo-logo-png.png'
+import ReCAPTCHA from "react-google-recaptcha"
 
 const LoginForm = () => {
   
@@ -29,13 +29,19 @@ const LoginForm = () => {
   const [password, setPassword] = useState("")
   const [stayLoggedIn, setStayLoggedIn] = useState(false)
   const [errorMsg, setErrorMsg] = useState("")
-
+  const reRef = useRef<ReCAPTCHA>(null)
 
 
   // function to login to Hylo
   const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const data = await useLogin({ username, password, stayLoggedIn }, setErrorMsg)    
+
+    const token = await reRef.current?.executeAsync()
+
+    //reset the reCAPTCHA trigger
+    reRef.current?.reset()
+  
+    const data = await useLogin({ username, password, stayLoggedIn, token}, setErrorMsg)    
     if (data) {
       
       navigate('/home/thread/view')
@@ -88,6 +94,11 @@ const LoginForm = () => {
               <span>Don't have an account? 
               <Link to="/register">
               <button className='signup-btn'>SIGN UP</button></Link></span>
+
+              <ReCAPTCHA 
+                sitekey={'6LdqwxsmAAAAAB4TKxLkVrZInqhhPNyfJVrb0nc5'}
+                size='invisible'
+                ref= { reRef }/>
           </div>
       </form>
   )

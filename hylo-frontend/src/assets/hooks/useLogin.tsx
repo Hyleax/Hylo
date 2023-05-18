@@ -6,18 +6,20 @@ export type useLoginProps = {
     username: string
     password: string
     stayLoggedIn: boolean
+    token: string | null | undefined
 }
   //set cookie 
   const cookies = new Cookies()
 
 export default async function useLogin(
-    { username, password, stayLoggedIn }: useLoginProps, 
+    { username, password, stayLoggedIn, token }: useLoginProps, 
     setErrorMsg: React.Dispatch<React.SetStateAction<string>>) {
     try {
         const { data } = await axios.post('http://localhost:5000/hylo/api/v1/auth/login', {
             username: username,
             password: password,
-            stayLoggedIn: stayLoggedIn
+            stayLoggedIn: stayLoggedIn,
+            reCAPTCHAToken: token
         }, {withCredentials: true}
         )
 

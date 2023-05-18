@@ -38,12 +38,7 @@ export type nameInitalsType = {
     const str = String(dateCreatedOn)
     const dateString = str.substring(0, 10)
     let nameArray;
-    
-
-    
-   
-
-    
+        
   
     // check if name initials are set
     useEffect(() => {
@@ -54,8 +49,8 @@ export type nameInitalsType = {
          nameArray = fullName.split(" ")
          setLocalFirstName(nameArray[0])
          setLocalLastName(nameArray[1])
-         setLocalDescription(description)
         }
+        setLocalDescription(description)
           setLocalProfilePic(profilePic)
       })()
     }, [fullName, profilePic])
@@ -98,7 +93,8 @@ export type nameInitalsType = {
       e.preventDefault()
       if (!(!localFirstName || !localLastName)) {
         const data = await useSaveProfileInfo(localFirstName, localLastName, localDescription)
-
+        console.log(data);
+        
         if (data) {
           setEditBtnClicked(prev => !prev)
         }
