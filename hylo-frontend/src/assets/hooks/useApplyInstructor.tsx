@@ -11,7 +11,7 @@ export default async function useApplyInstructor(file: File[]) {
     try {
         const { data } = await axios({
             method: 'POST',
-            url: `http://localhost:5000/hylo/api/v1/user/upload-file`,
+            url: `https://hylo-discussion-backend.onrender.com/hylo/api/v1/user/upload-file`,
             data: formdata,
             headers: {
                 "Content-Type": "multipart/form-data"

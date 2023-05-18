@@ -141,7 +141,7 @@ UserSchema.methods.sendNewPasswordEmail = function() {
         
 
         jwt.sign({userEmail: this.email}, process.env.JWT_SECRET, {expiresIn: '1d'}, (err, emailToken) => {
-            const url = `http://localhost:5000/hylo/api/v1/auth/password-reset-verification/${emailToken}/${this.email}`;
+            const url = `https://hylo-discussion-backend.onrender.com/hylo/api/v1/auth/password-reset-verification/${emailToken}/${this.email}`;
 
             transporter.sendMail({
                 to: this.email,

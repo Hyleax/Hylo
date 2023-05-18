@@ -208,7 +208,7 @@ const verifyForgotPasswordRequest = async(req, res) => {
     }
 
     // redirect to front-end change password link
-    return res.redirect('http://localhost:3002/change-password')
+    return res.redirect('https://hylo-discussion.netlify.app/change-password')
 }
 
 

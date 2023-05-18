@@ -11,7 +11,7 @@ const ForgetPasswordForm = () => {
     const handleForgetPasswordSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         
-        const { data } = await axios.post(`http://localhost:5000/hylo/api/v1/auth/forgot-password`, {
+        const { data } = await axios.post(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/auth/forgot-password`, {
             email: email
         })
 

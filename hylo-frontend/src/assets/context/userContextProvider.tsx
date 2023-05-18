@@ -37,7 +37,7 @@ const UserContextProvider = ({children}: UserContextProviderType) => {
   useEffect(() => {
     (async() => {
       try {
-        const { data } = await axios.get('http://localhost:5000/hylo/api/v1/user')   
+        const { data } = await axios.get('https://hylo-discussion-backend.onrender.com/hylo/api/v1/user')   
         setUserData(data)  
       } catch (error: any) {
         if (error.response.data.error === 'cookie not found') {

@@ -16,7 +16,7 @@ const ChangePasswordForm = () => {
         const email = localStorage.getItem('email')
 
         try {
-            const { data } = await axios.patch(`http://localhost:5000/hylo/api/v1/auth/change-password/`, {
+            const { data } = await axios.patch(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/auth/change-password/`, {
                 password: password,
                 confirmPassword: confirmPassword, 
                 email: email

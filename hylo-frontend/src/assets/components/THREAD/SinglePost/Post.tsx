@@ -63,7 +63,7 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
     useEffect(() => {
         (
             async function() {
-                const { data } = await axios.get(`http://localhost:5000/hylo/api/v1/thread/get-post-user-type/${createdBy}`)
+                const { data } = await axios.get(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/get-post-user-type/${createdBy}`)
                 setLocalUserType(data.userType)
                 
             }
@@ -72,7 +72,7 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
     
 
     const handleRatingClick = async() => {
-        await axios.patch(`http://localhost:5000/hylo/api/v1/thread/upvote-post/${_id}`)
+        await axios.patch(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/upvote-post/${_id}`)
         setLocalRatings(prev => prev + 1)
     }
 
@@ -110,7 +110,7 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
             if (num && num <= numofReplies) {
                try {
                 setLocalRank(num)
-                const {data} = await axios.patch(`http://localhost:5000/hylo/api/v1/thread/rankReply/${_id}`, {
+                const {data} = await axios.patch(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/rankReply/${_id}`, {
                     rank: num
                 })
                } catch (error) {                
