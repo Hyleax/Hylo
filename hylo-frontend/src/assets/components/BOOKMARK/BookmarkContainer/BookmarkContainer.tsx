@@ -21,9 +21,7 @@ const BookmarkContainer = () => {
     if (bookmarkRef.current) {
       if (bookmarkRef.current.style.visibility == 'hidden') {
         bookmarkRef.current.style.visibility = 'visible'
-      }
-      console.log('clicked');
-      
+      }  
     }
   }
   

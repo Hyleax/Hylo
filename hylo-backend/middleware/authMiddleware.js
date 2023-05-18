@@ -7,7 +7,7 @@ const authMiddleware = (req, res, next) => {
         const token = req.cookies.token;
 
         if (!token) {
-            res.status(404).json({error: 'cookie not found not found'})
+            res.status(404).json({error: 'cookie not found'})
         }
 
 

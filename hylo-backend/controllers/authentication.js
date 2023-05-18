@@ -150,7 +150,6 @@ const validateHuman = async(reCAPTCHAToken) => {
     const secret = process.env.RECAPTCHA_SECRET_KEY
     const { data } = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${reCAPTCHAToken}`)
 
-    console.log(data, "recaptcha data");
     return data.success
 }
 

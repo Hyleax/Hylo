@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react'
 import Navbar from '../components/NAV/Navbar/Navbar'
-import { Navigate, Outlet, useNavigate } from 'react-router-dom'
-import useUserData from '../hooks/useUserData'
-
+import { Outlet } from 'react-router-dom'
 
 // find a way to create protected routes here
   

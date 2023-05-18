@@ -21,7 +21,7 @@ export type nameInitalsType = {
 
      // get data of the logged in user
   const  { userData } = useUserData()
-
+    
     const { email, description, fullName, dateCreatedOn, profilePic, totalRatings, numofIA, numOfPosts } = (userData as userType)
     const [nameInitials, setNameInitials] = useState<nameInitalsType>({} as nameInitalsType)
     const [modalOpen, setModalOpen] = useState(false)
@@ -53,7 +53,7 @@ export type nameInitalsType = {
         setLocalDescription(description)
           setLocalProfilePic(profilePic)
       })()
-    }, [fullName, profilePic])
+    }, [fullName, profilePic, description])
 
     
 
@@ -93,8 +93,7 @@ export type nameInitalsType = {
       e.preventDefault()
       if (!(!localFirstName || !localLastName)) {
         const data = await useSaveProfileInfo(localFirstName, localLastName, localDescription)
-        console.log(data);
-        
+
         if (data) {
           setEditBtnClicked(prev => !prev)
         }

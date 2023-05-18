@@ -1,5 +1,6 @@
 import React, {useState, useEffect, createContext} from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router'
 
 export type userType = {
   fullName: string,
@@ -31,11 +32,19 @@ type UserContextProviderType = {
 
 const UserContextProvider = ({children}: UserContextProviderType) => {
   const [userData, setUserData] = useState<userType | null>({} as userType)
-  
+  const navigate = useNavigate()
+
   useEffect(() => {
     (async() => {
-      const { data } = await axios.get('http://localhost:5000/hylo/api/v1/user')   
-      setUserData(data)  
+      try {
+        const { data } = await axios.get('http://localhost:5000/hylo/api/v1/user')   
+        setUserData(data)  
+      } catch (error: any) {
+        if (error.response.data.error === 'cookie not found') {
+          navigate('/')
+        }
+        
+      }
     })()
   }, [])
   
