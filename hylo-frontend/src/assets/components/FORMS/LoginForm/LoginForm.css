@@ -7,7 +7,7 @@
 .first-login-container {
     background-color: white;
     width: 350px;
-    height: 410px;
+    height: 420px;
     border-radius: 5px;
     padding: 10px 25px;
     box-shadow: 0px 1px 20px 0px #000000;
@@ -77,6 +77,7 @@
     border: none;
     background-color: #8BC6EC;
     background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+    position: relative;
 }
 
 .login-btn:hover {
@@ -99,4 +100,26 @@
 
 .forgot-password-link {
     text-decoration: none;
+}
+
+.login-loader {
+    position: absolute;
+    bottom: 7px;
+    right: 47%;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -130,9 +130,6 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
         }
     }
 
-    console.log(userData?.fullName.split(" "), thread[0].creatorName.split(" "));
-    
-
     const names = thread[0].creatorName.split(" ")
 
     return (

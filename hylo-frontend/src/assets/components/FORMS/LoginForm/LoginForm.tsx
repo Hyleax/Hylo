@@ -29,22 +29,23 @@ const LoginForm = () => {
   const [password, setPassword] = useState("")
   const [stayLoggedIn, setStayLoggedIn] = useState(false)
   const [errorMsg, setErrorMsg] = useState("")
+  const [isLoginClicked, setIsLoginClicked] = useState(false)
   const reRef = useRef<ReCAPTCHA>(null)
 
 
   // function to login to Hylo
   const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    setIsLoginClicked(prev => !prev)
     const token = await reRef.current?.executeAsync()
 
     //reset the reCAPTCHA trigger
     reRef.current?.reset()
   
-    const data = await useLogin({ username, password, stayLoggedIn, token}, setErrorMsg)    
+    const data = await useLogin({ username, password, stayLoggedIn, token}, setErrorMsg, setIsLoginClicked)    
     if (data) {
-      
       navigate('/home/thread/view')
+      setIsLoginClicked(false)
     }
   }
   
@@ -87,7 +88,11 @@ const LoginForm = () => {
               {/* DISPLAY error message here */}
               <span className='error-msg'>{errorMsg}</span>
 
-              <button className='login-btn'>LOGIN</button>
+              <button className='login-btn'>
+                {
+                  isLoginClicked ? <div className='login-loader'></div> : "LOGIN"
+                }
+              </button>
 
               
 

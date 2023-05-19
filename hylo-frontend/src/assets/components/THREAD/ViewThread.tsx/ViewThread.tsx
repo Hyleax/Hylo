@@ -47,13 +47,23 @@ const handleRankAnswer = () => {
       handleRankAnswer={handleRankAnswer}/>
   })
 
-    return (
-      <div className='view-thread-container'>
-          {posts}
-          <ReplyTextEditor threadID={threadID} setThread={setThread}/>
-      </div>
-    )
-  
+    if (thread.length !== 0) {
+      return (
+        <div className='view-thread-container'>
+            {posts}
+            <ReplyTextEditor threadID={threadID} setThread={setThread}/>
+        </div>
+      )
+    }
+
+    else {
+      return (
+        <div className='pre-loading-threads'>
+            <p>Loading selected Thread</p>
+            <div className="loader"></div>
+        </div>
+      )
+    }
 }
 
 export default ViewThread

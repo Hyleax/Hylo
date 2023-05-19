@@ -19,13 +19,17 @@ const AllThreads = () => {
         path = {`../view/`}
         key={p.threadID}
       />)
-  })
+  })  
 
   return (
     <div className='all-threads-container'>
       <Search/>
       <ThreadFilter/>
-      {threadPreviewEls}
+
+      {allPosts.length !== 0 ? threadPreviewEls :   <div className='pre-loading-threads'>
+        <p>Loading Posts</p>
+        <div className='loader'></div>
+      </div>}
     </div>
   )
 }

@@ -13,7 +13,8 @@ export type useLoginProps = {
 
 export default async function useLogin(
     { username, password, stayLoggedIn, token }: useLoginProps, 
-    setErrorMsg: React.Dispatch<React.SetStateAction<string>>) {
+    setErrorMsg: React.Dispatch<React.SetStateAction<string>>,
+    setIsLoginClicked: React.Dispatch<React.SetStateAction<boolean>>) {
     try {
         const { data } = await axios.post('https://hylo-discussion-backend.onrender.com/hylo/api/v1/auth/login', {
             username: username,
@@ -32,10 +33,11 @@ export default async function useLogin(
         
         
     } catch (error: any) {
-
+        
         setErrorMsg(error.response.data.error)
         setTimeout(() => {
             setErrorMsg("")
         }, 3000)
+        setIsLoginClicked(false)
     }
 }
