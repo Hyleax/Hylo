@@ -42,8 +42,13 @@ const LoginForm = () => {
     //reset the reCAPTCHA trigger
     reRef.current?.reset()
   
-    const data = await useLogin({ username, password, stayLoggedIn, token}, setErrorMsg, setIsLoginClicked)    
-    if (data) {
+
+    // calling custom hook to login
+    const data = await useLogin(
+      { username, password, stayLoggedIn, token}, 
+      setErrorMsg, setIsLoginClicked)    
+    
+      if (data) {
       navigate('/home/thread/view')
       setIsLoginClicked(false)
     }
