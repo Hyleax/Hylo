@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './MainProfile.css'
 import useGetNameInitials from '../../../hooks/useGetNameInitials'
 import AvatarEdit from '../Avatar-edit/AvatarEdit'
@@ -22,21 +22,25 @@ export type nameInitalsType = {
      // get data of the logged in user
   const  { userData } = useUserData()
     
+    // state for user information
     const { email, description, fullName, dateCreatedOn, profilePic, totalRatings, numofIA, numOfPosts } = (userData as userType)
     const [nameInitials, setNameInitials] = useState<nameInitalsType>({} as nameInitalsType)
-    const [modalOpen, setModalOpen] = useState(false)
     const [localProfilePic, setLocalProfilePic] = useState("")
     const [localFirstName, setLocalFirstName] = useState('')
     const [localLastName, setLocalLastName] = useState('')
     const [localDescription, setLocalDescription] = useState('')
+
+
+    // state to set various menu states
+    const [imageOverlayOpen, setImageOverlayOpen] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
     const [editBtnClicked, setEditBtnClicked] = useState(false)
-    const imageContainerRef = useRef<HTMLDivElement>(null)
-    const imageOverlayRef = useRef<HTMLDivElement>(null)
-    const modalRef = useRef<HTMLDivElement>(null)
-    const modalContentRef = useRef<HTMLDivElement>(null)
-    
+
+    // format date
     const str = String(dateCreatedOn)
     const dateString = str.substring(0, 10)
+    
+    
     let nameArray;
         
   
@@ -55,40 +59,8 @@ export type nameInitalsType = {
       })()
     }, [fullName, profilePic, description])
 
-    
 
-
-    // if mouse hover over and off the profile pic element
-    const handleMouseEnterImageOverlay = () => {
-      if (imageOverlayRef.current){
-        imageOverlayRef.current.style.visibility = 'visible'
-      }     
-    }
-
-    const handleMouseLeaveImageOverlay = () => {
-      if (imageOverlayRef.current){
-        imageOverlayRef.current.style.visibility = 'hidden'
-      }      
-    }
-
-
-
-    // function to display and hidel modal based on user click
-    const handleModal = () => {
-      if (modalOpen === false) {
-        if (modalRef.current) {
-          modalRef.current.style.display = 'block'
-          setModalOpen(prev => !prev)
-        }
-      }
-      else {
-        if (modalRef.current) {
-          modalRef.current.style.display = 'none'
-          setModalOpen(prev => !prev)
-        }
-      }
-    }
-
+    // submit profile changes to backend
     const saveProfileChanges = async(e:  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault()
       if (!(!localFirstName || !localLastName)) {
@@ -104,23 +76,26 @@ export type nameInitalsType = {
       <main>
             <div className="profile-container">
                 <div 
-                  className="image-container" 
-                  ref={imageContainerRef} 
-                  onMouseEnter={handleMouseEnterImageOverlay}
+                  className="image-container"  
+                  onMouseEnter={() => setImageOverlayOpen(true)}
                   >
                   {localProfilePic != "" ? 
                   <img className='profile-img' src= {`${localProfilePic}`} alt="" /> :
                   <p>{nameInitials.firstInitial}{nameInitials.secondInitial}</p>}
                   
                 </div>
-                <div 
+                
+                {
+                  imageOverlayOpen &&
+
+                  <div 
                   className="edit-image-overlay" 
-                  ref={imageOverlayRef}
-                  onMouseLeave={handleMouseLeaveImageOverlay}
-                  onClick={handleModal}
+                  onMouseLeave={() => setImageOverlayOpen(false)}
+                  onClick={() => setModalOpen(true)}
                   >
                   <p className="">change profile pic</p>
                 </div>
+                }
 
                 
                 <div className="profile-header">
@@ -212,13 +187,16 @@ export type nameInitalsType = {
                 </div>
             </div>
 
-            <div className="modal" ref={modalRef} >
-              <div className="modal-content" ref={modalContentRef}>
+            { 
+              modalOpen &&
+
+              <div className="modal">
+              <div className="modal-content">
                 <img 
                   className='close-logo' 
                   src={closeLogo} 
                   alt=""
-                  onClick={handleModal} />
+                  onClick={() => setModalOpen(false)} />
                 <div className="avatar-edit-container">
                   <AvatarEdit 
                     setLocalProfilePic= {setLocalProfilePic}
@@ -227,6 +205,7 @@ export type nameInitalsType = {
                 
               </div>
             </div>
+            }
           </main>
     )
   }

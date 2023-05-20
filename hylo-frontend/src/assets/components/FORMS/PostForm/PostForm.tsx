@@ -26,7 +26,7 @@ const PostForm = () => {
                 msgRef.current.style.visibility = 'visible' 
 
                 setAllPostsAndReplies(prev => [...prev, data.post])
-                // open to page containing the fresh thread and post, prob use a setTImeout
+                // open to page containing the fresh thread and post
                 navigate(`../view/${data.post.threadID}`)
             }
            

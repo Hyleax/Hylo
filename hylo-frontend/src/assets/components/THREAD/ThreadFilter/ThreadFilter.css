@@ -24,7 +24,6 @@
 }
 
 .filters-container {
-    visibility: hidden;
     background-color: #F0F0F0;
     padding: 10px 10px;
     text-align: right;
@@ -48,9 +47,9 @@
     position: relative
 }
 .sort-criteria-container {
+    /* visibility: hidden; */
     display: flex;
     flex-direction: column;
-    visibility: hidden;
     position: absolute;
      background-color: #F0F0F0;
      padding: 10px 10px;

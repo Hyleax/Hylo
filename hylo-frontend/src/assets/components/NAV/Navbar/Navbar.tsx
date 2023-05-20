@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 import Cookies from 'universal-cookie'
@@ -14,7 +14,7 @@ const Navbar = () => {
 
     const { userData, setUserData } = useUserData()  
     const [nameInitials, setNameInitials] = useState<nameInitalsType>({} as nameInitalsType)
-    const dropdownRef = useRef<HTMLDivElement>(null)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
      // check if name initials are set
      useEffect(() => {
@@ -25,20 +25,6 @@ const Navbar = () => {
         })()
       }, [userData?.fullName])
 
-
-
-    // functions to open and close the profile dropdown menu
-    const handleMouseEnter = () => {
-        if (dropdownRef.current != null) {
-            dropdownRef.current.style.visibility = 'visible' 
-        }
-    }
-
-    const handleMouseLeave = () => {
-        if (dropdownRef.current != null) {
-            dropdownRef.current.style.visibility = 'hidden' 
-        }
-    }
 
     const navigate = useNavigate()
     const handleLogout = async() => {
@@ -54,12 +40,15 @@ const Navbar = () => {
             <li><Link to={'thread/view'} className='link-item'>Home</Link></li>
             <li 
                 className='menu-dropdown-parent'
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                onMouseEnter={() => setIsMenuOpen(true)}
+                onMouseLeave={() => setIsMenuOpen(false)}
                 >
                 Menu
         
-                        <div className="menu-dropdown" ref={dropdownRef}>
+                        {
+                            isMenuOpen &&
+
+                            <div className="menu-dropdown">
                             <div className="menu-profile-container">
                                 
                                 {
@@ -100,6 +89,7 @@ const Navbar = () => {
                                 className='logout link-item'>Logout
                             </div>
                         </div>
+                        }
                 
             </li>
         </ul>

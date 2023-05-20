@@ -23,12 +23,10 @@ export type userContextType = {
 // create user context
 export const UserContext = createContext<userContextType | null>(null)
 
-
 // props
 type UserContextProviderType = {
   children: React.ReactNode
 }
-
 
 const UserContextProvider = ({children}: UserContextProviderType) => {
   const [userData, setUserData] = useState<userType | null>({} as userType)
@@ -47,13 +45,12 @@ const UserContextProvider = ({children}: UserContextProviderType) => {
       }
     })()
   }, [])
-  
 
   return (
     <UserContext.Provider value={{userData, setUserData}}>
       {children}
     </UserContext.Provider>
-  )
+  )  
 }
 
 export default UserContextProvider

@@ -26,7 +26,7 @@ const ThreadPreview = ({ data, path }:ThreadPreviewProps) => {
     }
 
     else if (category === 'LECTURES'){
-      if (categoryRef.current){
+      if (categoryRef.current){      
         categoryRef.current.style.backgroundColor = "lightgreen"
       }
 
@@ -65,11 +65,6 @@ const ThreadPreview = ({ data, path }:ThreadPreviewProps) => {
       categoryEl = category.toLowerCase()
     }
 
-    // if user is not instructor, then dont display user type
-    // if user is an instructor, display 'instructor' 
-
-    
-    
     const navigate = useNavigate()
 
   const handleClick = () => {

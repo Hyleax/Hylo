@@ -43,7 +43,6 @@ main {
 .edit-image-overlay {
     cursor: pointer;
     color: white;
-    visibility: hidden;
     position: absolute;
     top: 2%;
     left: 50%;
@@ -186,7 +185,6 @@ textarea {
 }
 /* MODAL STUFF */
 .modal {
-  display: none; /* Hidden by default */
   position: absolute; /* Stay in place */
   z-index: 1000; /* Sit on top */
   left: 0;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import './BookmarkContainer.css'
 import useGetBookmarkedThreads from '../../../hooks/useGetBookmarkedThreads'
 import ThreadPreview from '../../THREAD/ThreadPreview/ThreadPreview'
@@ -7,23 +7,13 @@ import { postType } from '../../THREAD/SinglePost/Post'
 
 const BookmarkContainer = () => {
   const [bookmarkedThreads, setBookmarkedThreads] = useState<postType[]>([])
-  const bookmarkRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     (async() => {
-      const data = await  useGetBookmarkedThreads()
+      const data = await useGetBookmarkedThreads()
       setBookmarkedThreads(data)
     })()
   }, [])
-
-  const handleBookmarkPosts = () => {
-
-    if (bookmarkRef.current) {
-      if (bookmarkRef.current.style.visibility == 'hidden') {
-        bookmarkRef.current.style.visibility = 'visible'
-      }  
-    }
-  }
   
 
   const threadPreviewEls = bookmarkedThreads?.map((p) => {
@@ -38,8 +28,6 @@ const BookmarkContainer = () => {
   return (
     <div 
       className='bookmark-container'
-      onClick={handleBookmarkPosts}
-      ref= {bookmarkRef}
     >
         <h5 className='bookmark-container-title'>Bookmarked Threads</h5>
         {threadPreviewEls}

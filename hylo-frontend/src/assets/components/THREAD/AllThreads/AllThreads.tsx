@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import './AllThreads.css'
 import Search from '../Search/Search'
 import ThreadFilter from '../ThreadFilter/ThreadFilter'
@@ -8,9 +8,9 @@ import useGetAllPosts from '../../../hooks/useGetAllPosts'
 const AllThreads = () => {
   const { allPostsAndReplies } = useGetAllPosts()
   
-  const allPosts = allPostsAndReplies?.filter((p) => {
+  const allPosts = useMemo(() =>allPostsAndReplies?.filter((p) => {
     return p.postType === 'POST'
-  })
+  }), [allPostsAndReplies])
 
   const threadPreviewEls = allPosts?.map((p) => {
     return (
@@ -19,7 +19,7 @@ const AllThreads = () => {
         path = {`../view/`}
         key={p.threadID}
       />)
-  })  
+  })    
 
   return (
     <div className='all-threads-container'>

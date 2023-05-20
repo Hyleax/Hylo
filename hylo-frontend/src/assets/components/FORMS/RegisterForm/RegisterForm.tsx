@@ -24,6 +24,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
+
   // state for error message
   const [errorMsg, setErrorMsg] = useState("")
 

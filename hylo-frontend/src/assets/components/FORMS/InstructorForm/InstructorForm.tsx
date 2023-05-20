@@ -8,7 +8,6 @@ const fileTypes = ["JPG", "PDF", "DOC", "PNG"];
 const InstructorForm = () => {
 
     const [file, setFile] = useState<File[]>([])
-    const containerRef = useRef<HTMLDivElement>(null)
     const msgRef = useRef<HTMLParagraphElement>(null)
 
     const handleFile = (newFile: any) => {
@@ -68,7 +67,7 @@ const InstructorForm = () => {
 
                 <div 
                     className='files-container'
-                    ref={containerRef}
+              
                     >   
                         {
                             file && fileNameElements

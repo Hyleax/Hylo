@@ -1,5 +1,5 @@
 import React, {useState, useEffect, createContext} from 'react'
-import axios from 'axios'
+import axios, { all } from 'axios'
 import { postType } from '../components/THREAD/SinglePost/Post'
 
 export type replyType = {
@@ -37,7 +37,7 @@ const PostContextProvider = ({children}: PostContextProviderType) => {
   useEffect(() => {
     (async() => {
       const { data } = await axios.get('https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/get-all-posts')       
-      setAllPostsAndReplies(data.posts)
+      setAllPostsAndReplies(data.posts)    
     })()
   }, [])
 

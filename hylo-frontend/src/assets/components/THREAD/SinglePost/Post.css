@@ -166,7 +166,7 @@
 .three-dots-menu {
     display: flex;
     flex-direction: column;
-    visibility: hidden;
+    /* visibility: hidden; */
     cursor: pointer;
     border-radius: 10px;
     position: absolute;

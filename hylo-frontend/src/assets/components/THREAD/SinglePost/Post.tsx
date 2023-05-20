@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Post.css'
 import axios from 'axios'
 import threeDotsLogo from '../../../images/3-vertical-dots-icon.svg'
@@ -44,10 +44,9 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
     const {content, createdBy, creatorName, instructorApproved, profilePic, postedDate, ratings, title, _id, rank} = data
     const [localProfilePic, setLocalProfilePic] = useState(profilePic)
     const [localRatings, setLocalRatings] = useState(0)
-    const [isMenuOpen, setIsMenuOpen] = useState(true)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [localInstructorApproved, setLocalInstructorApproved] = useState(instructorApproved)
     const [localUserType, setLocalUserType] = useState("")
-    const postMenuRef = useRef<HTMLDivElement>(null)
     const [localRank, setLocalRank] = useState<number | undefined>(rank)
     const [isRankingClicked, setIsRankingClicked] = useState(false)
     const [isBookmarked, setIsBookmarked] = useState(false)
@@ -69,25 +68,10 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
             }
         )()
     }, [])
-    
 
     const handleRatingClick = async() => {
         await axios.patch(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/upvote-post/${_id}`)
         setLocalRatings(prev => prev + 1)
-    }
-
-    const handleTogglePostMenu = () => {
-        setIsMenuOpen(prev => !prev)
-
-        if (isMenuOpen === true) {
-            if (postMenuRef.current)
-            postMenuRef.current.style.visibility = 'visible' 
-        }
-
-        else {
-            if (postMenuRef.current)
-            postMenuRef.current.style.visibility = 'hidden' 
-        }
     }
 
     const handleDeleteReply = async() => {
@@ -110,7 +94,7 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
             if (num && num <= numofReplies) {
                try {
                 setLocalRank(num)
-                const {data} = await axios.patch(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/rankReply/${_id}`, {
+                await axios.patch(`https://hylo-discussion-backend.onrender.com/hylo/api/v1/thread/rankReply/${_id}`, {
                     rank: num
                 })
                } catch (error) {                
@@ -123,14 +107,13 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
     const handleBookmark = async() => {
         const isSaved = await useBookmarkThread(_id)
         if (isSaved) {
+            
             // for now, users can't unsave by clicking again
             if (isBookmarked !== true) {
                 setIsBookmarked(prev => !prev)
             }
         }
     }
-
-    const names = thread[0].creatorName.split(" ")
 
     return (
         <div>
@@ -181,17 +164,24 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
                         {((!title && creatorName === userData?.fullName) || (userData?.userType === 'INSTRUCTOR' && !title)) &&
                         <div className='three-dots-container'>
                             <img
-                                onClick={handleTogglePostMenu} 
+                                onClick={() => setIsMenuOpen(prev => !prev)} 
                                 className='three-dots-logo' 
                                 src={threeDotsLogo} 
                                 alt="3 dots logo" /> 
-                            <div className="three-dots-menu" ref = {postMenuRef}>
-                                <button 
-                                    onClick={handleDeleteReply}
-                                    className='three-dots-btn'>
-                                        delete
-                                </button>
+                            
+                            {
+                                isMenuOpen && 
+
+                                <div className="three-dots-menu">
+                               
+                                    <button 
+                                        onClick={handleDeleteReply}
+                                        className='three-dots-btn'>
+                                            delete
+                                    </button>
+                               
                                 {userData.userType === 'INSTRUCTOR' && 
+                                
                                 <button
                                     onClick={approveReply}
                                     className='three-dots-btn'>
@@ -199,6 +189,7 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
                                 </button>}
                                 
                                 {/* if logged in user is the same as post author */}
+                                
                                 {
                                     (userData.fullName === thread[0].creatorName) &&
                                     <button
@@ -207,7 +198,9 @@ const Post = ({ data, numofReplies, setThread, thread, handleRankAnswer }: postP
                                         rank
                                     </button>
                                 }
-                            </div>
+                                </div>
+                            }
+
                         </div>}
                         
 
