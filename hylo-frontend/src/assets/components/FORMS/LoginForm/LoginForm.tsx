@@ -30,10 +30,12 @@ const LoginForm = () => {
   const [stayLoggedIn, setStayLoggedIn] = useState(false)
   const [errorMsg, setErrorMsg] = useState("")
   const [isLoginClicked, setIsLoginClicked] = useState(false)
+
+  // ref for google reCAPTCHA
   const reRef = useRef<ReCAPTCHA>(null)
 
 
-  // function to login to Hylo
+  // function to login to the system
   const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoginClicked(prev => !prev)
@@ -98,8 +100,6 @@ const LoginForm = () => {
                   isLoginClicked ? <div className='login-loader'></div> : "LOGIN"
                 }
               </button>
-
-              
 
               <span>Don't have an account? 
               <Link to="/register">

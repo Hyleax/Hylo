@@ -1,5 +1,5 @@
 import React, {useState, useEffect, createContext} from 'react'
-import axios, { all } from 'axios'
+import axios from 'axios'
 import { postType } from '../components/THREAD/SinglePost/Post'
 
 export type replyType = {

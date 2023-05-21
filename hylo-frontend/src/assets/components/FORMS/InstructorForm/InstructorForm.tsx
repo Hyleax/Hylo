@@ -28,21 +28,25 @@ const InstructorForm = () => {
         <p key={index} className='filename-element'>{fn}</p>
     ))
 
+
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        // write custom hook to subimt documents
-        const data = await useApplyInstructor(file)
-        
-        if (data){
-            if (msgRef.current) {
-                msgRef.current.style.visibility = 'visible'
-            }
-            setTimeout(() => {
+        if (file.length > 0) {
+            
+            // write custom hook to subimt documents
+            const data = await useApplyInstructor(file)
+            
+            if (data){
                 if (msgRef.current) {
-                    msgRef.current.style.visibility = 'hidden'
+                    msgRef.current.style.visibility = 'visible'
                 }
-            }, 5000)
+                setTimeout(() => {
+                    if (msgRef.current) {
+                        msgRef.current.style.visibility = 'hidden'
+                    }
+                }, 5000)
+            }
         }
 
     }
@@ -80,8 +84,7 @@ const InstructorForm = () => {
                     handleChange={handleFile}
                     name = "file"
                     types = {fileTypes}   
-                    label = "Upload your academic qualifications here" 
-                    required
+                    label = "Upload your academic qualifications here"         
                     fileOrFiles
                 />
 
